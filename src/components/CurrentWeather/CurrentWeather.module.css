@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Teko&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Teko&family=Yanone+Kaffeesatz:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&family=Teko&family=Yanone+Kaffeesatz:wght@300&display=swap');
+
+.weather {
+    display: flex;
+    background-color: #88bdbc;
+}
+
+.weatherSections {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.weatherSections p {
+    font-family: 'Barlow', sans-serif;
+    font-size: small;
+    font-weight: lighter;
+}
+
+.card{
+    width: 70rem;
+}
+
+button {
+    border: #3c6382;
+    float: right;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-weight: bold;
+    font-size: large;
+    padding: 4px;
+    border-radius: 2px;
+    background-color: #c7ecee;
+    cursor: pointer;
+}
+
+button:active {
+    background-color: #a5b1c2;
+}
+
+.title {
+    font-weight: bold;
+    font-size: x-large;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+.time {
+    margin-top: 0;
+    font-size: small;
+    color: #3c6382;
+    font-weight: bold;
+    font-family: 'PT Sans Narrow', sans-serif;
+}
+
+.iconClass {
+    display: block;
+    height: 70px;
+    width: 70px;
+    margin: auto;
+    padding-top: 10px;
+}
+
+.detailsTable td {
+    font-family: 'Barlow', sans-serif;
+    border: black;
+    padding-right: 2rem;
+    padding-left: 1rem;
+    font-size: small;
+}
+
+.detailsTable tr:nth-child(odd) {
+    background-color: #ccc;
+}
+
+.airQualityText{
+    background-color: #7bed9f;
+}
+
+.temperature {
+    font-family: 'Barlow', sans-serif;
+    font-size: 50px;
+    margin: auto;
+}
