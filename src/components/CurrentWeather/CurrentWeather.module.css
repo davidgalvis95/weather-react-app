@@ -10,7 +10,7 @@
 
 .weatherSections {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .weatherSections p {
@@ -83,4 +83,55 @@ button:active {
     font-family: 'Barlow', sans-serif;
     font-size: 50px;
     margin: auto;
+    max-width: 80px;
+}
+
+.temperatureFontSize {
+
+}
+
+
+/*DETAILED*/
+.list {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.subtitle {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: x-large;
+    text-align: center;
+}
+
+.detailsTable2 td {
+    width: 82px;
+}
+
+.weatherSectionsWellSpaced {
+    display: flex;
+    justify-content: center;
+}
+
+.realFeel {
+    font-family: 'Barlow', sans-serif;
+    font-size: 20px;
+    margin: auto;
+}
+
+.realFeel p {
+    font-size: 20px;
+    margin-top: 0.5rem;
+}
+
+.realFeel h5 {
+    font-weight: normal;
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+.temperatureDetailed {
+    /*margin-left: 3rem;*/
+    /*margin-right: 3rem;*/
 }
