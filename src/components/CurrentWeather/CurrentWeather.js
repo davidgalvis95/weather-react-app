@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import Card from "../../hoc/Card/Card";
 import classes from './CurrentWeather.module.css';
-import { WiDaySunnyOvercast } from 'react-icons/wi';
 import SunnyWithClouds from "../Icons/weather/SunnyWithClouds";
+import {CurrentWeatherContext} from "../../context/current-weather-context";
 
 
 export const weatherGeneral = {
@@ -24,10 +24,14 @@ export const mainWeather = {
 
 
 const CurrentWeather = (props) => {
-    const [weather, setWeather] = useState({});
-    useEffect(() => {
-        console.log("Hello");
-    }, [])
+    // const [weather, setWeather] = useState({});
+
+    const context = useContext(CurrentWeatherContext);
+
+    const displaySate = () => {
+        console.log(context);
+        props.renderComponent();
+    }
 
     return (
         <section className={classes.weather}>
@@ -61,7 +65,7 @@ const CurrentWeather = (props) => {
                     </table>
                 </div>
                 <div className={classes.buttonContainer}>
-                    <button>Details →</button>
+                    <button onClick={displaySate}>Details →</button>
                 </div>
             </Card>
         </section>

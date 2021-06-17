@@ -1,9 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useReducer, useContext} from 'react';
 //TODO Centralize axios
 import axios from "axios";
 import classes from "./CurrentWeather.module.css";
 import Card from "../../hoc/Card/Card";
 import SunnyWithClouds from "../Icons/weather/SunnyWithClouds";
+import useCurrentWeather from "../../hooks/useCurrentWeather";
+import weatherRequestReducer from "../../reducers/weatherRequestReducer";
+import {initialState} from "../../reducers/weatherRequestReducer";
+import {CurrentWeatherContext} from "../../context/current-weather-context";
 
 //This object will be passed through props
 export const mainWeather = {
@@ -21,16 +25,8 @@ export const mainWeather = {
 const CurrentWeatherDetailed = (props) => {
 
     const [weatherDetails, setWeatherDetails] = useState(mainWeather);
-
-    useEffect(() => {
-
-        //fetch the info from the api
-        console.log("Hello");
-    }, [])
-
-    async function getCurrentWeather() {
-        const currentWeather = await axios
-    }
+    const context = useContext(CurrentWeatherContext);
+    useEffect(() => console.log(context), [context])
 
 
     const renderWeatherDetailsData = function () {
@@ -45,8 +41,8 @@ const CurrentWeatherDetailed = (props) => {
         })
 
         const medianIndex = ((weatherDetailsArray.length / 2) % 2 === 0 ? (weatherDetailsArray.length / 2) + 0.5 : (weatherDetailsArray.length / 2));
-        const firstWeatherDetailsHalf = weatherRowDetails.filter(row => row.key <= medianIndex );
-        const secondWeatherDetailsHalf = weatherRowDetails.filter(row => row.key >= medianIndex );
+        const firstWeatherDetailsHalf = weatherRowDetails.filter(row => row.key <= medianIndex);
+        const secondWeatherDetailsHalf = weatherRowDetails.filter(row => row.key >= medianIndex);
 
         return (
             <div className={classes.weatherSections}>
