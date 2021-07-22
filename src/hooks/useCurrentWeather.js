@@ -17,18 +17,18 @@ const useCurrentWeather = () => {
         dispatchWeatherRequestActions({type: 'SEND'});
         const query = `weather?q=${city}`;
         console.log(query);
-        api.get(query)
-            .then(res => {
-                // console.log(res)
-                // console.log(JSON.stringify(res.data))
-                const responseData = res.data;
-                // console.log(responseData.base);
-                dispatchWeatherRequestActions({type: 'RESPONSE', responseData: responseData});
-            })
-            .catch(err => {
-                console.log(err);
-                dispatchWeatherRequestActions({type: 'ERROR', errorMessage: 'Something went wrong!'});
-            });
+        // api.get(query)
+        //     .then(res => {
+        //         // console.log(res)
+        //         // console.log(JSON.stringify(res.data))
+        //         const responseData = res.data;
+        //         // console.log(responseData.base);
+        //         dispatchWeatherRequestActions({type: 'RESPONSE', responseData: responseData});
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //         dispatchWeatherRequestActions({type: 'ERROR', errorMessage: 'Something went wrong!'});
+        //     });
     }, []);
 
 

@@ -7,7 +7,7 @@ const Search = () => {
             <div className={classes.searchBox}>
                 <input className={classes.searchText} placeholder="Search new location"/>
                 <div className={classes.loaderWrapper}>
-                    {/*<div className={classes.loader}/>*/}
+                    {/* <div className={classes.loader}/> */}
                 </div>
             </div>
         </div>

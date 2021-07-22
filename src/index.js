@@ -7,6 +7,7 @@ import {Provider} from 'react-redux'
 import {createStore, combineReducers} from 'redux'
 
 import weatherRequestReducer from "./reducers/weatherRequestReducer";
+import { BrowserRouter } from 'react-router-dom';
 
 // const reducers = combineReducers({
 //     weather: weatherRequestReducer,
@@ -15,9 +16,11 @@ import weatherRequestReducer from "./reducers/weatherRequestReducer";
 
 ReactDOM.render(
     // <Provider store={store}>
+    <BrowserRouter>
         <React.StrictMode>
             <App/>
         </React.StrictMode>
+    </BrowserRouter>
     // </Provider>,
     ,document.getElementById('root')
 );

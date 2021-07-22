@@ -19,7 +19,8 @@ const CurrentWeatherParent = (props) => {
         <div>
             <Search/>
             {comp}
-        </div>);
+        </div>
+    );
 }
 
 export default CurrentWeatherParent;

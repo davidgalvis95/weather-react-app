@@ -10,6 +10,7 @@ const CurrentWeatherContextProvider = props => {
     const {city} = props;
 
     useEffect(() => {
+        console.log(city);
         if (city !== '') {
             getCurrentWeatherPointer(city);
         }
