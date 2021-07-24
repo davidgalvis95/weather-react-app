@@ -2,9 +2,10 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar'
 import MainSearch from './components/MainSearch/MainSearch'
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import CurrentWeatherParent from "./hoc/CurrentWeatherParent";
-import CurrentWeatherContextProvider from './context/current-weather-context'
+import CurrentWeatherContextProvider from './context/current-weather-context';
+import NotFound from './components/NotFound/NotFound';
 
 function App() {
 
@@ -16,19 +17,27 @@ function App() {
         setSearchBegan(true);
     };
 
+    // TODO ensure that the search component is not loaded if the search has began
+    // TODO Extract the content except the routes of this component in a separate component
     return (
         <Router>
             <div>
             <Navbar/>
-            {searchBegan ? null : <MainSearch beginSearch={beginSearchHandler}/>}
+            {searchBegan || (searchBegan && city === '') ? null : <MainSearch beginSearch={beginSearchHandler}/>}
             <Switch>
+                <Route path='/not-found' component={NotFound}/>
                 <Route path='/current-weather' render={() => {
-                  console.log(city);
-                  return (
-                    <CurrentWeatherContextProvider city={city}>
-                        <CurrentWeatherParent/>
-                    </CurrentWeatherContextProvider>
-                )}}/>
+                    if(!searchBegan && city === ''){
+                        return null;
+                    }else{
+                        return (
+                            <CurrentWeatherContextProvider city={city} searchBegan={searchBegan}>
+                                <CurrentWeatherParent/>
+                            </CurrentWeatherContextProvider>
+                        );
+                    }
+                }}/>
+                {/* <Route component={NotFound}/> */}
             </Switch>
             </div>
         </Router>

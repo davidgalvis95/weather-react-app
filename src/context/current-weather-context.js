@@ -1,20 +1,26 @@
 import {useState, createContext, useEffect} from "react";
 import useCurrentWeather from "../hooks/useCurrentWeather";
 import {initialState} from "../reducers/weatherRequestReducer";
+import { useHistory } from "react-router";
 
 export const CurrentWeatherContext = createContext(initialState);
 
 const CurrentWeatherContextProvider = props => {
-    const {getCurrentWeatherPointer, isLoading, error, data} = useCurrentWeather();
+    const {initializeLoadingPointer, getCurrentWeatherPointer, isLoading, error, data} = useCurrentWeather();
     const [state, setState] = useState(initialState);
-    const {city} = props;
+    const {city, searchBegan} = props;
+    const history = useHistory();
 
     useEffect(() => {
-        console.log(city);
+        if(!searchBegan && city === '') {
+            history.replace('/');
+        }
+
         if (city !== '') {
+            initializeLoadingPointer();
             getCurrentWeatherPointer(city);
         }
-    }, [city, getCurrentWeatherPointer])
+    }, [city, initializeLoadingPointer, getCurrentWeatherPointer, searchBegan])
 
     useEffect(() => {
         const currentState = {
@@ -24,10 +30,11 @@ const CurrentWeatherContextProvider = props => {
         }
         console.log(currentState);
         setState(currentState);
-    }, [data, error, isLoading]);
+    }, [isLoading, data, error]);
 
     return (
         <CurrentWeatherContext.Provider value={{
+            initializeLoading: initializeLoadingPointer,
             getWeatherFunction: getCurrentWeatherPointer,
             isLoading: state.isLoading,
             error: state.error,

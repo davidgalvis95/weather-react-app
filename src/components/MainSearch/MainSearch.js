@@ -18,7 +18,7 @@ const MainSearch = (props) => {
                     history.push('/current-weather');
                 }
             }
-        }, 500)
+        }, 500);
     }, [enteredSearch, searchCurrentWeather, beginSearch])
 
 
