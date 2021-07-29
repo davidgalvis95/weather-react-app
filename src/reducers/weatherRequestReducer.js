@@ -2,21 +2,22 @@
 export const initialState = {
     loading: false,
     error: null,
-    data: null,
+    data: {},
 }
 
 const weatherRequestReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SEND':
-            console.log(state.loading)
-            return {...state,
+            return { ...state,
                 loading: true,
+                data: null,
+                error: null,
             };
         case 'RESPONSE':
-            console.log(state.loading)
             return {...state,
                 loading: false,
-                data: action.responseData
+                data: action.responseData,
+                error: null,
             };
         case 'ERROR':
             return {...state,
@@ -26,7 +27,7 @@ const weatherRequestReducer = (state = initialState, action) => {
             };
         case 'CLEAR-ERROR':
             return {...state,
-                error:null
+                error: null
             };
         default:
             return state;

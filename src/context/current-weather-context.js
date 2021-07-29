@@ -17,7 +17,6 @@ const CurrentWeatherContextProvider = props => {
         }
 
         if (city !== '') {
-            initializeLoadingPointer();
             getCurrentWeatherPointer(city);
         }
     }, [city, initializeLoadingPointer, getCurrentWeatherPointer, searchBegan])
@@ -28,17 +27,16 @@ const CurrentWeatherContextProvider = props => {
             data: data,
             isLoading: isLoading
         }
-        console.log(currentState);
         setState(currentState);
     }, [isLoading, data, error]);
 
     return (
         <CurrentWeatherContext.Provider value={{
-            initializeLoading: initializeLoadingPointer,
             getWeatherFunction: getCurrentWeatherPointer,
             isLoading: state.isLoading,
             error: state.error,
-            data: state.data
+            data: state.data,
+            searchBegan: searchBegan
         }}>
             {props.children}
         </CurrentWeatherContext.Provider>
