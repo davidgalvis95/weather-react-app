@@ -4,30 +4,29 @@ import weatherRequestReducer from "../reducers/weatherRequestReducer";
 import { initialState } from "../reducers/weatherRequestReducer";
 
 const useCurrentWeather = () => {
-
   const [state, dispatch] = useReducer(weatherRequestReducer, initialState);
 
   const clear = useCallback(() => dispatch({ type: "CLEAR-ERROR" }), []);
 
-//   const sendRequestToGetCurrentWeather = useCallback((city) => {
-//     const query = `weather?q=${city}`;
-//     console.log(query);
-//     dispatch({ type: "SEND" });
+  //   const sendRequestToGetCurrentWeather = useCallback((city) => {
+  //     const query = `weather?q=${city}`;
+  //     console.log(query);
+  //     dispatch({ type: "SEND" });
 
-//     // api.get(query)
-//     fakeGetApiCall()
-//       .then((res) => {
-//         // console.log(res)
-//         // console.log(JSON.stringify(res.data))
-//         const responseData = res.data;
-//         // console.log(responseData.base);
-//         dispatch({ type: "RESPONSE", responseData: responseData });
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//         dispatch({ type: "ERROR", errorMessage: "Something went wrong!" });
-//       });
-//   }, []);
+  //     // api.get(query)
+  //     fakeGetApiCall()
+  //       .then((res) => {
+  //         // console.log(res)
+  //         // console.log(JSON.stringify(res.data))
+  //         const responseData = res.data;
+  //         // console.log(responseData.base);
+  //         dispatch({ type: "RESPONSE", responseData: responseData });
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //         dispatch({ type: "ERROR", errorMessage: "Something went wrong!" });
+  //       });
+  //   }, []);
 
   const sendRequestToGetCurrentWeatherAsync = useCallback(async (city) => {
     const query = `weather?q=${city}`;
@@ -47,7 +46,7 @@ const useCurrentWeather = () => {
   const fakeGetApiCall = () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve({ data: "data" });
+        resolve({ data: { x: "data" } });
       }, 3000);
     });
   };

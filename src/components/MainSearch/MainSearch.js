@@ -11,7 +11,7 @@ const MainSearch = (props) => {
     const history = useHistory();
 
     useEffect(() => {
-        const timer = setTimeout(() => {
+        setTimeout(() => {
             if (searchCurrentWeather.current !== null) {
                 if (enteredSearch === searchCurrentWeather.current.value && enteredSearch.length > 0) {
                     beginSearch(enteredSearch);
@@ -20,11 +20,6 @@ const MainSearch = (props) => {
             }
         }, 500);
     }, [enteredSearch, searchCurrentWeather, beginSearch])
-
-
-    const startSearchHandler = () => {
-        // beginSearch(enteredSearch);
-    }
 
 
     return (
@@ -40,7 +35,7 @@ const MainSearch = (props) => {
                     }}
                     value={enteredSearch}
                 />
-                <div className={classes.searchBtn} onClick={startSearchHandler}>
+                <div className={classes.searchBtn}>
                     <RiSearchLine/>
                 </div>
             </div>

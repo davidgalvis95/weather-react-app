@@ -3,62 +3,62 @@
 /*-----------------------*/
 
 .mainSearchDiv {
-    /*TODO adjust this to be dynamic*/
-    height: 43rem;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    background: #a5b1c2;
+  /*TODO adjust this to be dynamic*/
+  height: 43rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #a5b1c2;
 }
 
 /*-----------------------*/
 /*search bar centered*/
 /*-----------------------*/
-.searchBox{
-    /*z-index: 1;*/
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%);
-    background: #f1f2f6;
-    height: 40px;
-    border-radius: 40px;
-    padding: 10px;
+.searchBox {
+  /*z-index: 1;*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #f1f2f6;
+  height: 40px;
+  border-radius: 40px;
+  padding: 10px;
 }
 
 .searchBox:hover > .searchText {
-    width: 240px;
-    padding: 0 6px;
+  width: 240px;
+  padding: 0 6px;
 }
 
 .searchBox:hover > .searchBtn {
-    background: #7bed9f;
+  background: #7bed9f;
 }
 
 .searchBtn {
-    /*z-index: 1;*/
-    color: #1e272e;
-    float: right;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #05c46b;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.4s;
+  /*z-index: 1;*/
+  color: #1e272e;
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #05c46b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
 }
 
-.searchText{
-    /*z-index: 1;*/
-    border: none;
-    background: none;
-    outline: none;
-    float: left;
-    padding: 0;
-    color: #1e272e;
-    font-size: 16px;
-    transition: 0.4s;
-    line-height: 40px;
-    width: 0px;
+.searchText {
+  /*z-index: 1;*/
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  color: #1e272e;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 40px;
+  width: 0px;
 }
