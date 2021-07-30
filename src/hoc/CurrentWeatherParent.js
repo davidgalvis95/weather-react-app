@@ -7,7 +7,7 @@ import { CurrentWeatherContext } from "../context/current-weather-context";
 
 const CurrentWeatherParent = () => {
   const [renderDetails, setRenderDetails] = useState(0);
-  const { data, queryFromMain } = useContext(CurrentWeatherContext);
+  const { data, queryFromMain, initialSearch } = useContext(CurrentWeatherContext);
 
   const renderComponent = () => {
     setRenderDetails(1);
@@ -26,7 +26,7 @@ const CurrentWeatherParent = () => {
     </div>
   );
 
-  if (queryFromMain && (!data || objectIsEmpty(data))) {
+  if ((queryFromMain || initialSearch ) && (!data || objectIsEmpty(data))) {
     parentComponent = null;
   }
 

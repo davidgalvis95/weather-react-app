@@ -14,12 +14,12 @@ const CurrentWeatherContextProvider = (props) => {
     data,
   } = useCurrentWeather();
   const [state, setState] = useState(initialState);
-  const { city, searchBegan, queryFromMainSearch } = props;
+  const { city, searchBegan, initialSearch } = props;
   const [queryFromMain, setQueryFromMain] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
-    setQueryFromMain(queryFromMainSearch);
+    setQueryFromMain(initialSearch);
   }, []);
 
   useEffect(() => {
@@ -53,6 +53,7 @@ const CurrentWeatherContextProvider = (props) => {
         error: state.error,
         data: state.data,
         queryFromMain: queryFromMain,
+        initialSearch: initialSearch,
         queryFromMainToggleHandler: queryFromMainToggleHandler
       }}
     >

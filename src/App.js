@@ -11,16 +11,16 @@ function App() {
 
     const [city, setCity] = useState('');
     const [searchBegan, setSearchBegan] = useState(false);
-    const [queryFromMainSearch, setQueryFromMainSearch] = useState(false);
+    const [initialSearch, setInitialSearch] = useState(false);
 
     useEffect(() => {
-        setQueryFromMainSearch(false);
+        setInitialSearch(false);
       }, [])
 
     const beginSearchHandler = (city) => {
         setCity(city)
         setSearchBegan(true);
-        setQueryFromMainSearch(true);
+        setInitialSearch(true);
     };
 
     //Fix the backwards navigation so that when given into the back button, this one renders the main search component
@@ -36,7 +36,7 @@ function App() {
                         return <Redirect to="/" />;
                     }else{
                         return (
-                            <CurrentWeatherContextProvider city={city} searchBegan={searchBegan} queryFromMainSearch={queryFromMainSearch}>
+                            <CurrentWeatherContextProvider city={city} searchBegan={searchBegan} initialSearch={initialSearch}>
                                 <CurrentWeatherParent/>
                             </CurrentWeatherContextProvider>
                         );
