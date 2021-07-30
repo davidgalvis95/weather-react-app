@@ -8,7 +8,7 @@ export const CurrentWeatherContext = createContext(initialState);
 const CurrentWeatherContextProvider = props => {
     const {initializeLoadingPointer, getCurrentWeatherPointer, isLoading, error, data} = useCurrentWeather();
     const [state, setState] = useState(initialState);
-    const {city, searchBegan} = props;
+    const {city, searchBegan, initialReq, initialReqHandler} = props;
     const history = useHistory();
 
     useEffect(() => {
@@ -20,6 +20,7 @@ const CurrentWeatherContextProvider = props => {
             getCurrentWeatherPointer(city);
         }
     }, [city, initializeLoadingPointer, getCurrentWeatherPointer, searchBegan])
+
 
     useEffect(() => {
         const currentState = {
@@ -36,7 +37,9 @@ const CurrentWeatherContextProvider = props => {
             isLoading: state.isLoading,
             error: state.error,
             data: state.data,
-            searchBegan: searchBegan
+            searchBegan: searchBegan,
+            initialReqHandler: initialReqHandler,
+            initialReq: initialReq
         }}>
             {props.children}
         </CurrentWeatherContext.Provider>

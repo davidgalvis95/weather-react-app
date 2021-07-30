@@ -5,7 +5,7 @@ import { useHistory } from 'react-router';
 
 const MainSearch = (props) => {
 
-    const {beginSearch} = props;
+    const {beginSearch, initialReqHandler1} = props;
     const searchCurrentWeather = useRef();
     const [enteredSearch, setEnteredSearch] = useState('');
     const history = useHistory();
@@ -14,6 +14,7 @@ const MainSearch = (props) => {
         const timer = setTimeout(() => {
             if (searchCurrentWeather.current !== null) {
                 if (enteredSearch === searchCurrentWeather.current.value && enteredSearch.length > 0) {
+                    initialReqHandler1();
                     beginSearch(enteredSearch);
                     history.push('/current-weather');
                 }
