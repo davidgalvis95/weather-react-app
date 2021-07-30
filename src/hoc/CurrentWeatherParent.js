@@ -1,8 +1,10 @@
+
 import React, {useState, useContext, useEffect} from "react";
 import CurrentWeather from "../components/CurrentWeather/CurrentWeather";
 import CurrentWeatherDetailed from "../components/CurrentWeather/CurrentWeatherDetailed";
-import {CurrentWeatherContext} from '../context/current-weather-context'
 import Search from "../components/CurrentWeather/Search/Search";
+import { objectIsEmpty } from "../util/util";
+import { CurrentWeatherContext } from "../context/current-weather-context";
 
 const CurrentWeatherParent = (props) => {
     const [renderDetails, setRenderDetails] = useState(false);

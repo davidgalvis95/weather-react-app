@@ -1,6 +1,6 @@
-import {useState, createContext, useEffect} from "react";
+import { useState, createContext, useEffect } from "react";
 import useCurrentWeather from "../hooks/useCurrentWeather";
-import {initialState} from "../reducers/weatherRequestReducer";
+import { initialState } from "../reducers/weatherRequestReducer";
 import { useHistory } from "react-router";
 
 export const CurrentWeatherContext = createContext(initialState);
