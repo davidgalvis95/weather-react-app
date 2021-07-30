@@ -1,40 +1,47 @@
-import React, { useState, useContext, useEffect } from "react";
+
+import React, {useState, useContext, useEffect} from "react";
 import CurrentWeather from "../components/CurrentWeather/CurrentWeather";
 import CurrentWeatherDetailed from "../components/CurrentWeather/CurrentWeatherDetailed";
 import Search from "../components/CurrentWeather/Search/Search";
 import { objectIsEmpty } from "../util/util";
 import { CurrentWeatherContext } from "../context/current-weather-context";
 
-const CurrentWeatherParent = () => {
-  const [renderDetails, setRenderDetails] = useState(false);
-  const { data, queryFromMain, initialSearch } = useContext(CurrentWeatherContext);
+const CurrentWeatherParent = (props) => {
+    const [renderDetails, setRenderDetails] = useState(false);
+    const {data, isLoading, initialReq} = useContext(CurrentWeatherContext);
 
-  const renderDetailsHandler = () => {
-    setRenderDetails(true);
-  };
+    useEffect(() => {
+      // console.log(initialReq)
+      console.log(data)
+      // console.log(isLoading)
+    }, [data, isLoading, initialReq]);
 
-  useEffect(() => {
-    console.log(data);
-  }, []);
+    const renderComponent = () => {
+        setRenderDetails(true)
+    }
 
-  let comp = <CurrentWeather detailsHandler={renderDetailsHandler} data={data}/>;
-  if (renderDetails) {
-    comp = <CurrentWeatherDetailed data={data}/>;
-  }
+    let comp = <CurrentWeather renderComponent={renderComponent} data={data}/>;
+    if (renderDetails) {
+        comp = <CurrentWeatherDetailed data={data}/>
+    }
 
-  //TODO: render a loading icon and message instead od a null component
-  let parentComponent = (
-    <div>
-      <Search />
-      {comp}
-    </div>
-  );
+    let parentComponent = (
+      <div>
+        <Search/>
+        {comp}
+      </div>
+    );
 
-  if ((queryFromMain || initialSearch ) && (!data || objectIsEmpty(data))) {
-    parentComponent = null;
-  }
+    if(isLoading && initialReq) {
+      parentComponent = null;
+    }
 
-  return <div>{parentComponent}</div>;
-};
+
+    return (
+        <div>
+            {parentComponent}
+        </div>
+    );
+}
 
 export default CurrentWeatherParent;

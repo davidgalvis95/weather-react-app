@@ -34,8 +34,8 @@ const useCurrentWeather = () => {
     dispatch({ type: "SEND" });
 
     try {
-      // const result = await api.get(query);
-      const result = await fakeGetApiCall();
+      //const result = await api.get(query);
+      const result = await fakeGetApiCall(city);
       dispatch({ type: "RESPONSE", responseData: result.data });
     } catch (error) {
       console.log(error);
@@ -43,10 +43,10 @@ const useCurrentWeather = () => {
     }
   }, []);
 
-  const fakeGetApiCall = () => {
+  const fakeGetApiCall = (city) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve({ data: { x: "data" } });
+        resolve({ data: "data " + city});
       }, 3000);
     });
   };

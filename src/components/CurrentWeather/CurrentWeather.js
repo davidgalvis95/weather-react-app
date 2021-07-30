@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import Card from "../../hoc/Card/Card";
 import classes from './CurrentWeather.module.css';
 import SunnyWithClouds from "../Icons/weather/SunnyWithClouds";
@@ -26,7 +26,10 @@ export const mainWeather = {
 const CurrentWeather = (props) => {
     // const [weather, setWeather] = useState({});
 
+    const {data} = props;
     const context = useContext(CurrentWeatherContext);
+
+    useEffect(() => {console.log(data)}, [data])
 
     const displaySate = () => {
         console.log(context);
