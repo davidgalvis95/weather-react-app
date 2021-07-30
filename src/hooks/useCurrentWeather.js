@@ -1,5 +1,5 @@
 import { useReducer, useCallback, useEffect } from "react";
-import api from "../utils/WeatherApiConfig";
+import api from "../axios/WeatherApiConfig";
 import weatherRequestReducer from "../reducers/weatherRequestReducer";
 import { initialState } from "../reducers/weatherRequestReducer";
 
@@ -34,7 +34,7 @@ const useCurrentWeather = () => {
     dispatch({ type: "SEND" });
 
     try {
-      //const result = await api.get(query);
+      // const result = await api.get(query);
       const result = await fakeGetApiCall();
       dispatch({ type: "RESPONSE", responseData: result.data });
     } catch (error) {

@@ -4,7 +4,7 @@ import { CurrentWeatherContext } from "../../../context/current-weather-context"
 import { useContext } from "react";
 
 const Search = () => {
-  const { getWeatherFunction, isLoading, queryFromMainToggleHandler } =
+  const { getWeatherFunction, isLoading, queryFromMainToggleHandler, data } =
     useContext(CurrentWeatherContext);
   const [citySearch, setCitySearch] = useState("");
   const [shouldLoad, setShouldLoad] = useState(false);
@@ -13,6 +13,10 @@ const Search = () => {
     console.log(shouldLoad);
     console.log(isLoading);
   }, [shouldLoad, isLoading]);
+
+  useEffect(() => {
+    console.log(data);
+  }, data);
 
   const handleKeyPress = (event) => {
     setShouldLoad(true);

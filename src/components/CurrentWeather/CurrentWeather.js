@@ -30,7 +30,7 @@ const CurrentWeather = (props) => {
 
     const displaySate = () => {
         console.log(context);
-        props.renderComponent();
+        props.detailsHandler();
     }
 
     return (

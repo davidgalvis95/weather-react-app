@@ -39,6 +39,7 @@ const CurrentWeatherContextProvider = (props) => {
       isLoading: isLoading,
     };
     setState(currentState);
+    console.log(currentState);
   }, [isLoading, data, error]);
 
   const queryFromMainToggleHandler = () => {
