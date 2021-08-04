@@ -19,7 +19,7 @@ const MainSearch = (props) => {
                     history.push('/current-weather');
                 }
             }
-        }, 500);
+        }, 1000);
     }, [enteredSearch, searchCurrentWeather, beginSearch])
 
 

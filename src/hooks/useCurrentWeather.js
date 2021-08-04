@@ -2,6 +2,7 @@ import { useReducer, useCallback, useEffect } from "react";
 import api from "../axios/WeatherApiConfig";
 import weatherRequestReducer from "../reducers/weatherRequestReducer";
 import { initialState } from "../reducers/weatherRequestReducer";
+import { simulatedCurrentWeather } from "../components/SimulatedApiData/simulatedWeatherData";
 
 const useCurrentWeather = () => {
   const [state, dispatch] = useReducer(weatherRequestReducer, initialState);
@@ -36,6 +37,7 @@ const useCurrentWeather = () => {
     try {
       //const result = await api.get(query);
       const result = await fakeGetApiCall(city);
+      console.log(result);
       dispatch({ type: "RESPONSE", responseData: result.data });
     } catch (error) {
       console.log(error);
@@ -46,7 +48,7 @@ const useCurrentWeather = () => {
   const fakeGetApiCall = (city) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve({ data: "data " + city});
+        resolve({ data: {...simulatedCurrentWeather}});
       }, 3000);
     });
   };

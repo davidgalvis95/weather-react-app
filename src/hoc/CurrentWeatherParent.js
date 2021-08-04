@@ -5,14 +5,17 @@ import CurrentWeatherDetailed from "../components/CurrentWeather/CurrentWeatherD
 import Search from "../components/CurrentWeather/Search/Search";
 import { objectIsEmpty } from "../util/util";
 import { CurrentWeatherContext } from "../context/current-weather-context";
+import useCurrentWeatherResult from "../hooks/useCurrentWeatherResult"
 
 const CurrentWeatherParent = (props) => {
     const [renderDetails, setRenderDetails] = useState(false);
     const {data, isLoading, initialReq} = useContext(CurrentWeatherContext);
+    const {transformData} = useCurrentWeatherResult();
 
     useEffect(() => {
-      // console.log(initialReq)
+      console.log(initialReq)
       console.log(data)
+      
       // console.log(isLoading)
     }, [data, isLoading, initialReq]);
 
@@ -20,9 +23,9 @@ const CurrentWeatherParent = (props) => {
         setRenderDetails(true)
     }
 
-    let comp = <CurrentWeather renderComponent={renderComponent} data={data}/>;
+    let comp = <CurrentWeather renderComponent={renderComponent} data={data} transformData={transformData}/>;
     if (renderDetails) {
-        comp = <CurrentWeatherDetailed data={data}/>
+        comp = <CurrentWeatherDetailed data={data} transformData={transformData}/>
     }
 
     let parentComponent = (
@@ -32,8 +35,8 @@ const CurrentWeatherParent = (props) => {
       </div>
     );
 
-    if(isLoading && initialReq) {
-      parentComponent = null;
+    if(initialReq && isLoading) {
+      parentComponent = <h1>Hello</h1>;
     }
 
 
