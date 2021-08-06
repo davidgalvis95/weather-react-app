@@ -9,21 +9,30 @@ import {
 } from "react-router-dom";
 import { useState, useEffect } from "react";
 import CurrentWeatherParent from "./hoc/CurrentWeatherParent";
-import CurrentWeatherContextProvider from "./context/current-weather-context";
+import CurrentWeatherContextProvider from "./context/currentWeatherContext";
 import NotFound from "./components/NotFound/NotFound";
+import useCurrentWeather from "./hooks/useCurrentWeather"
 
 function App() {
   const [city, setCity] = useState("");
   const [searchBegan, setSearchBegan] = useState(false);
   const [initialReq, setInitialReq] = useState(false);
+  const {isLoading} = useCurrentWeather()
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    console.log(isLoading);
+    setLoading(isLoading);
+  }, [isLoading])
 
   const beginSearchHandler = (city) => {
     setCity(city);
     setSearchBegan(true);
-    setInitialReq(true);
+    // setInitialReq(true);
   };
 
   //TODO make this to be handled by only one handler
+  //TODO why is this component being rendered before
   const initialReqHandler = () => setInitialReq(false);
   const initialReqHandler1 = () => setInitialReq(true);
 
