@@ -1,4 +1,4 @@
-import { updateTime } from "../utils/utilFunctions";
+import { updateTime } from "../util/utilFunctions";
 
 const currentWeatherSpecification = {
   temperature: null,

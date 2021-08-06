@@ -1,5 +1,5 @@
 import { useReducer, useCallback } from "react";
-import api from "../utils/WeatherApiConfig";
+import api from "../axios/WeatherApiConfig";
 import weatherRequestReducer from "../reducers/weatherRequestReducer";
 import { initialState } from "../reducers/weatherRequestReducer";
 import { simulatedCurrentWeather } from "../components/SimulatedApiData/simulatedWeatherData";

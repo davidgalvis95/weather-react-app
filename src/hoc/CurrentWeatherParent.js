@@ -4,7 +4,7 @@ import CurrentWeatherDetailed from "../components/CurrentWeather/CurrentWeatherD
 import { CurrentWeatherContext } from "../context/currentWeatherContext";
 import Search from "../components/CurrentWeather/Search/Search";
 import useCurrentWeatherResult from "../hooks/useCurrentWeatherResult";
-import { updateTime, isEmpty } from "../utils/utilFunctions";
+import { updateTime, isEmpty } from "../util/utilFunctions"
 
 const CurrentWeatherParent = (props) => {
   const [renderDetails, setRenderDetails] = useState(false);

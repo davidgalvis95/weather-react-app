@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import classes from "./Search.module.css";
-import { CurrentWeatherContext } from '../../../context/currentWeatherContext';
-import { useContext } from 'react';
+import { CurrentWeatherContext } from "../../../context/currentWeatherContext";
+import { useContext } from "react";
 
 const Search = () => {
+  const { getWeatherFunction, isLoading, searchBegan, initialReqHandler } =
+    useContext(CurrentWeatherContext);
+  const [citySearch, setCitySearch] = useState("");
 
-    const {getWeatherFunction, isLoading, searchBegan, initialReqHandler} = useContext(CurrentWeatherContext);
-    const [citySearch, setCitySearch] = useState('');
-
-    const handleKeyPress = (event) => {
-        if(event.key === 'Enter'){
-            initialReqHandler();
-            getWeatherFunction(event.target.value);
-        }
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      initialReqHandler();
+      getWeatherFunction(event.target.value);
     }
   };
 
@@ -31,7 +30,7 @@ const Search = () => {
           value={citySearch}
         />
         <div className={classes.loaderWrapper}>
-          {isLoading && shouldLoad ? <div className={classes.loader} /> : null}
+          {isLoading  ? <div className={classes.loader} /> : null}
         </div>
       </div>
     </div>
