@@ -1,20 +1,23 @@
-export const updateTime = () => {
-    var currentTime = new Date()
-    var hours = currentTime.getHours()
-    var minutes = currentTime.getMinutes()
-    if (minutes < 10){
-        minutes = "0" + minutes
-    }
-    var t_str = hours + ":" + minutes + " ";
-    if(hours > 11){
-        t_str += "PM";
-    } else {
-        t_str += "AM";
-    }
-    // document.getElementById('time_span').innerHTML = t_str;
+export const updateTime = (currentTime) => {
+  const hours = currentTime.getHours();
+  let minutes = currentTime.getMinutes();
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+  const timeString = hours + ":" + minutes;
+  return timeString;
 }
-setInterval(updateTime, 1000);
 
 export const isEmpty = (obj) => {
-    return Object.keys(obj).length === 0;
+  return Object.keys(obj).length === 0;
+}
+
+export const convertArrayToObject = (array, key) => {
+  const initialValue = {};
+  return array.reduce((obj, item) => {
+    return {
+      ...obj,
+      [item[key]]: item,
+    };
+  }, initialValue);
 }

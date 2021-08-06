@@ -1,86 +1,101 @@
-import React, {useState, useEffect, useReducer, useContext} from 'react';
-//TODO Centralize axios
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import classes from "./CurrentWeather.module.css";
 import Card from "../../hoc/Card/Card";
 import SunnyWithClouds from "../Icons/weather/SunnyWithClouds";
-import useCurrentWeather from "../../hooks/useCurrentWeather";
-import weatherRequestReducer from "../../reducers/weatherRequestReducer";
-import {initialState} from "../../reducers/weatherRequestReducer";
-import {CurrentWeatherContext} from "../../context/current-weather-context";
 
-//This object will be passed through props
-export const mainWeather = {
-    "description": "fog",
-    "pressure": 1011,
-    "humidity": 93,
-    "tempmin": 280.93,
-    "tempmax": 287.04,
-    "sunrise": 1570255614,
-    "sunset": 1570296659,
-    //this is from other object
-    "windSpeed": 1.5
-}
+
+const propertiesToDetail = [
+  "description",
+  "pressure",
+  "humidity",
+  "tempMin",
+  "tempMax",
+  "sunrise",
+  "sunset",
+  "windSpeed",
+];
 
 const CurrentWeatherDetailed = (props) => {
+  const { data, time, renderCurrentWeatherResume } = props;
+  const [weatherDetails, setWeatherDetails] = useState({});
 
-    const [weatherDetails, setWeatherDetails] = useState(mainWeather);
-    const context = useContext(CurrentWeatherContext);
-    useEffect(() => console.log(context), [context])
+  useEffect(() => {
+    const detailedData = Object.fromEntries(Object.entries(data).filter(entry => propertiesToDetail.includes(entry[0])));
+    setWeatherDetails(detailedData);
+  },[data])
 
+  const displayResume = () => {
+    renderCurrentWeatherResume();
+  };
 
-    const renderWeatherDetailsData = function () {
-        const weatherDetailsArray = Object.entries(weatherDetails);
-        const weatherRowDetails = weatherDetailsArray.map((entry, index) => {
-            return (
-                <tr key={index + 1}>
-                    <td>{entry[0]}</td>
-                    <td>{entry[1]}</td>
-                </tr>
-            )
-        })
+  const renderWeatherDetailsData = function () {
+    const weatherDetailsArray = Object.entries(weatherDetails);
+    const weatherRowDetails = weatherDetailsArray.map((entry, index) => {
+      return (
+        <tr key={index + 1}>
+          <td>{entry[0]}</td>
+          <td>{entry[1]}</td>
+        </tr>
+      );
+    });
 
-        const medianIndex = ((weatherDetailsArray.length / 2) % 2 === 0 ? (weatherDetailsArray.length / 2) + 0.5 : (weatherDetailsArray.length / 2));
-        const firstWeatherDetailsHalf = weatherRowDetails.filter(row => row.key <= medianIndex);
-        const secondWeatherDetailsHalf = weatherRowDetails.filter(row => row.key >= medianIndex);
+    const medianIndex =
+      (weatherDetailsArray.length / 2) % 2 === 0
+        ? weatherDetailsArray.length / 2 + 0.5
+        : weatherDetailsArray.length / 2;
+    const firstWeatherDetailsHalf = weatherRowDetails.filter(
+      (row) => row.key <= medianIndex
+    );
+    const secondWeatherDetailsHalf = weatherRowDetails.filter(
+      (row) => row.key >= medianIndex
+    );
 
-        return (
-            <div className={classes.weatherSections}>
-                <table className={`${classes.detailsTable} ${classes.detailsTable2}`}>{firstWeatherDetailsHalf}</table>
-                <table className={`${classes.detailsTable} ${classes.detailsTable2}`}>{secondWeatherDetailsHalf}</table>
-            </div>
-        );
-    }
     return (
-        <section className={classes.weather}>
-            <Card>
-                <ul className={classes.list}>
-                    <li className={classes.title}>Current Weather Details</li>
-                    <li className={classes.time}>22:33</li>
-                </ul>
-                <div className={`${classes.weatherSections}`}>
-                    <div>
-                        <div>
-                            {/*TODO think how to make this to work dynamically*/}
-                            <SunnyWithClouds className={classes.iconClass}/>
-                        </div>
-                        <p>Sunny with few clouds</p>
-                    </div>
-                    <div className={`${classes.temperature} ${classes.temperatureDetailed}`}>20°C</div>
-                    <div className={classes.realFeel}>
-                        <h5>Real Feel</h5>
-                        <p>18°C</p>
-                    </div>
-                </div>
-                <div className={`${classes.title} ${classes.subtitle}`}>Details</div>
-                {renderWeatherDetailsData()}
-                <div className={classes.buttonContainer}>
-                    <button>Go back →</button>
-                </div>
-            </Card>
-            {/*<Card>Something</Card>*/}
-        </section>
-    )
-}
+      <div className={classes.weatherSections}>
+        <table className={`${classes.detailsTable} ${classes.detailsTable2}`}>
+          <tbody>{firstWeatherDetailsHalf}</tbody>
+        </table>
+        <table className={`${classes.detailsTable} ${classes.detailsTable2}`}>
+          <tbody>{secondWeatherDetailsHalf}</tbody>
+        </table>
+      </div>
+    );
+  };
+
+  return (
+    <section className={classes.weather}>
+      <Card>
+        <ul className={classes.list}>
+          <li className={classes.title}>Current Weather Details</li>
+          <li className={classes.time}>{time}</li>
+        </ul>
+        <div className={`${classes.weatherSections}`}>
+          <div>
+            <div>
+              {/*TODO think how to make this to work dynamically*/}
+              <SunnyWithClouds className={classes.iconClass} />
+            </div>
+            <p>{data.description}</p>
+          </div>
+          <div
+            className={`${classes.temperature} ${classes.temperatureDetailed}`}
+          >
+            {data && data.temperature}°C
+          </div>
+          <div className={classes.realFeel}>
+            <h5>Real Feel</h5>
+            <p>{data && data.realFeel}°C</p>
+          </div>
+        </div>
+        <div className={`${classes.title} ${classes.subtitle}`}>Details</div>
+        {renderWeatherDetailsData()}
+        <div className={classes.buttonContainer}>
+          <button onClick={displayResume}>Go back →</button>
+        </div>
+      </Card>
+      {/*<Card>Something</Card>*/}
+    </section>
+  );
+};
 
 export default CurrentWeatherDetailed;

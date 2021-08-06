@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import { useState, useEffect } from "react";
 import CurrentWeatherParent from "./hoc/CurrentWeatherParent";
-import CurrentWeatherContextProvider from "./context/current-weather-context";
+import CurrentWeatherContextProvider from "./context/currentWeatherContext";
 import NotFound from "./components/NotFound/NotFound";
 import useCurrentWeather from "./hooks/useCurrentWeather"
 

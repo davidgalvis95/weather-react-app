@@ -1,5 +1,5 @@
-import { useReducer, useCallback, useEffect } from "react";
-import api from "../axios/WeatherApiConfig";
+import { useReducer, useCallback } from "react";
+import api from "../utils/WeatherApiConfig";
 import weatherRequestReducer from "../reducers/weatherRequestReducer";
 import { initialState } from "../reducers/weatherRequestReducer";
 import { simulatedCurrentWeather } from "../components/SimulatedApiData/simulatedWeatherData";
@@ -7,6 +7,7 @@ import { simulatedCurrentWeather } from "../components/SimulatedApiData/simulate
 const useCurrentWeather = () => {
   const [state, dispatch] = useReducer(weatherRequestReducer, initialState);
 
+  //TODO make the implementation for the clear and the error handling
   const clear = useCallback(() => dispatch({ type: "CLEAR-ERROR" }), []);
 
   //   const sendRequestToGetCurrentWeather = useCallback((city) => {
@@ -31,13 +32,11 @@ const useCurrentWeather = () => {
 
   const sendRequestToGetCurrentWeatherAsync = useCallback(async (city) => {
     const query = `weather?q=${city}`;
-    console.log(query);
     dispatch({ type: "SEND" });
 
     try {
       //const result = await api.get(query);
       const result = await fakeGetApiCall(city);
-      console.log(result);
       dispatch({ type: "RESPONSE", responseData: result.data });
     } catch (error) {
       console.log(error);

@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {Provider} from 'react-redux'
-import {createStore, combineReducers} from 'redux'
+// import {Provider} from 'react-redux'
+// import {createStore, combineReducers} from 'redux'
 
-import weatherRequestReducer from "./reducers/weatherRequestReducer";
+// import weatherRequestReducer from "./reducers/weatherRequestReducer";
 import { BrowserRouter } from 'react-router-dom';
 
 // const reducers = combineReducers({
