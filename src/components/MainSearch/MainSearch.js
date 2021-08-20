@@ -1,26 +1,27 @@
 import React, {useEffect, useRef, useState} from 'react';
 import classes from './MainSearch.module.css'
-import {RiSearchLine} from 'react-icons/ri';
+import { RiSearchLine } from 'react-icons/ri';
 import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
+import allActions from '../../store/actions/allActions';
 
-const MainSearch = (props) => {
+const MainSearch = () => {
 
-    const {beginSearch, initialReqHandler1} = props;
     const searchCurrentWeather = useRef();
     const [enteredSearch, setEnteredSearch] = useState('');
     const history = useHistory();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setTimeout(() => {
             if (searchCurrentWeather.current !== null) {
                 if (enteredSearch === searchCurrentWeather.current.value && enteredSearch.length > 0) {
-                    initialReqHandler1();
-                    beginSearch(enteredSearch);
+                    dispatch(allActions.searchStatusActions.sendFirstRequest(enteredSearch));
                     history.push('/current-weather');
                 }
             }
         }, 1000);
-    }, [enteredSearch, searchCurrentWeather, beginSearch])
+    }, [enteredSearch, searchCurrentWeather])
 
 
     return (

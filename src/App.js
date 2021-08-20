@@ -1,5 +1,4 @@
 import "./App.css";
-import Navbar from "./components/Navbar/Navbar";
 import MainSearch from "./components/MainSearch/MainSearch";
 import {
   BrowserRouter as Router,
@@ -7,69 +6,41 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { useState, useEffect } from "react";
-import CurrentWeatherParent from "./hoc/CurrentWeatherParent";
-import CurrentWeatherContextProvider from "./context/currentWeatherContext";
 import NotFound from "./components/NotFound/NotFound";
-import useCurrentWeather from "./hooks/useCurrentWeather"
+import Layout from "./hoc/Layout/Layout";
+import Weather from "./components/Weather/Weather";
+import {useSelector} from "react-redux";
 
 function App() {
-  const [city, setCity] = useState("");
-  const [searchBegan, setSearchBegan] = useState(false);
-  const [initialReq, setInitialReq] = useState(false);
-  const {isLoading} = useCurrentWeather()
-  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    console.log(isLoading);
-    setLoading(isLoading);
-  }, [isLoading])
+  const searchStatus = useSelector((state) => state.searchStatus);
 
-  const beginSearchHandler = (city) => {
-    setCity(city);
-    setSearchBegan(true);
-    // setInitialReq(true);
-  };
-
-  //TODO make this to be handled by only one handler
-  //TODO why is this component being rendered before
-  const initialReqHandler = () => setInitialReq(false);
-  const initialReqHandler1 = () => setInitialReq(true);
+  const routes = (
+    <Switch>
+      <Route path="/main-search" component={MainSearch} />
+      <Route path="/not-found" component={NotFound} />
+      <Route
+        path="/current-weather"
+        render={() => {
+          if (!searchStatus.searchBegan && searchStatus.city === null) {
+            return <Redirect to="/" />;
+          } else {
+            return <Weather/>
+          }
+        }}
+      />
+      <Route path="/" render={() => {
+        setTimeout(() => {
+          return <Redirect to="/main-search" />;
+        }, 2000);
+      }}/>
+      {/* <Route component={NotFound}/> */}
+    </Switch>
+  );
 
   return (
     <Router>
-      <div>
-        <Navbar />
-        {searchBegan || (searchBegan && city === "") ? null : (
-          <MainSearch 
-          beginSearch={beginSearchHandler}
-          initialReqHandler1={initialReqHandler1}
-          />
-        )}
-        <Switch>
-          <Route path="/not-found" component={NotFound} />
-          <Route
-            path="/current-weather"
-            render={() => {
-              if (!searchBegan && city === "") {
-                return <Redirect to="/" />;
-              } else {
-                return (
-                  <CurrentWeatherContextProvider
-                    city={city}
-                    searchBegan={searchBegan}
-                    initialReq={initialReq}
-                    initialReqHandler={initialReqHandler}
-                  >
-                    <CurrentWeatherParent />
-                  </CurrentWeatherContextProvider>
-                );
-              }
-            }}
-          />
-          {/* <Route component={NotFound}/> */}
-        </Switch>
-      </div>
+      <Layout>{routes}</Layout>
     </Router>
   );
 }

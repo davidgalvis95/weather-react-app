@@ -1,5 +1,4 @@
-export const simulatedCurrentWeather = 
-{
+export const simulatedCurrentWeather = {
   coord: {
     lon: -74.0817,
     lat: 4.6097,

@@ -1,15 +1,14 @@
-import React, { useState, useContext, useEffect } from "react";
-import CurrentWeather from "../components/CurrentWeather/CurrentWeather";
-import CurrentWeatherDetailed from "../components/CurrentWeather/CurrentWeatherDetailed";
-import { CurrentWeatherContext } from "../context/currentWeatherContext";
-import Search from "../components/CurrentWeather/Search/Search";
-import useCurrentWeatherResult from "../hooks/useCurrentWeatherResult";
-import { updateTime, isEmpty } from "../util/utilFunctions"
+import React, { useState, useEffect } from "react";
+import CurrentWeather from "./CurrentWeather";
+import CurrentWeatherDetailed from "./CurrentWeatherDetailed";
+import useTransformWeatherData from "../../../hooks/useTransformWeatherData";
+import { updateTime, isEmpty } from "../../../util/utilFunctions";
+import { useSelector } from "react-redux";
 
 const CurrentWeatherParent = (props) => {
+  const { data, error } = useSelector((state) => state.weatherApi);
   const [renderDetails, setRenderDetails] = useState(false);
-  const { data, isLoading, initialReq } = useContext(CurrentWeatherContext);
-  const { transformData } = useCurrentWeatherResult();
+  const { transformData } = useTransformWeatherData();
   const [time, setTime] = useState("");
   const [transformedData, setTransformedData] = useState();
   let intervalId = null;
@@ -19,6 +18,7 @@ const CurrentWeatherParent = (props) => {
       const newData = transformData(data);
       setTransformedData(newData);
     }
+  // eslint-disable-next-line
   }, [data]);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const CurrentWeatherParent = (props) => {
     setTime(currentTimeString);
   };
 
-  let comp = (
+  let currentWeatherComponent = (
     <CurrentWeather
       renderCurrentWeatherDetails={renderCurrentWeatherDetails}
       data={transformedData}
@@ -53,7 +53,7 @@ const CurrentWeatherParent = (props) => {
     />
   );
   if (renderDetails) {
-    comp = (
+    currentWeatherComponent = (
       <CurrentWeatherDetailed
         renderCurrentWeatherResume={renderCurrentWeatherResume}
         data={transformedData}
@@ -62,18 +62,7 @@ const CurrentWeatherParent = (props) => {
     );
   }
 
-  let parentComponent = (
-    <div>
-      <Search />
-      {comp}
-    </div>
-  );
-
-  if (initialReq && isLoading) {
-    parentComponent = <h1>Loading...</h1>;
-  }
-
-  return <div>{parentComponent}</div>;
+  return <div>{currentWeatherComponent}</div>;
 };
 
 export default CurrentWeatherParent;

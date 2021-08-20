@@ -1,6 +1,6 @@
-import Card from "../../hoc/Card/Card";
+import Card from "../../../hoc/Card/Card";
 import classes from "./CurrentWeather.module.css";
-import SunnyWithClouds from "../Icons/weather/SunnyWithClouds";
+import SunnyWithClouds from "../../Icons/weather/SunnyWithClouds";
 
 const CurrentWeather = (props) => {
 

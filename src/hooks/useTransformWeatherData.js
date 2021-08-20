@@ -31,7 +31,7 @@ const currentWeatherSpecification = {
   },
 };
 
-const useCurrentWeatherResult = () => {
+const useTransformWeatherData = () => {
   // const [result, setResult] = useState(currentWeatherSpecification);
 
   const transformData = (data) => {
@@ -83,4 +83,4 @@ const getTimeFromTimestamp = (timestamp) => {
 //   return tempMappingFunctionsMap.get(operation)(temperature);
 // };
 
-export default useCurrentWeatherResult;
+export default useTransformWeatherData;

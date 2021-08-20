@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 import classes from "./Search.module.css";
-import { CurrentWeatherContext } from "../../../context/currentWeatherContext";
-import { useContext } from "react";
+import allActions from "../../../../store/actions/allActions";
+import useWeatherQuery from "../../../../hooks/useWeatherQuery";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Search = () => {
-  const { getWeatherFunction, isLoading, searchBegan, initialReqHandler } =
-    useContext(CurrentWeatherContext);
+  const searchState = useSelector((state) => state.searchState);
+  const apiDataState = useSelector((state) => state.weatherApi);
+  const { fetchWeatherDataPointer } = useWeatherQuery();
+  const dispatch = useDispatch();
   const [citySearch, setCitySearch] = useState("");
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      initialReqHandler();
-      getWeatherFunction(event.target.value);
+      dispatch(
+        allActions.searchStatusActions.sendAdditionalRequests(
+          event.target.value
+        )
+      );
+      fetchWeatherDataPointer(event.target.value);
     }
   };
 
@@ -30,7 +38,9 @@ const Search = () => {
           value={citySearch}
         />
         <div className={classes.loaderWrapper}>
-          {isLoading  ? <div className={classes.loader} /> : null}
+          {apiDataState.loading && !searchState.initialRequest ? (
+            <div className={classes.loader} />
+          ) : null}
         </div>
       </div>
     </div>

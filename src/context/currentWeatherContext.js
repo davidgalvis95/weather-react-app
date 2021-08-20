@@ -1,12 +1,14 @@
 import { useState, createContext, useEffect } from "react";
-import useCurrentWeather from "../hooks/useCurrentWeather";
-import { initialState } from "../reducers/weatherRequestReducer";
+import useCurrentWeather from "../hooks/useWeatherQuery";
+import { initialState } from "../store/reducers/weatherRequestReducer";
 import { useHistory } from "react-router";
+import { kindOfQuery } from "../hooks/useWeatherQuery";
+
 
 export const CurrentWeatherContext = createContext(initialState);
 
 const CurrentWeatherContextProvider = props => {
-    const {initializeLoadingPointer, getCurrentWeatherPointer, isLoading, error, data} = useCurrentWeather();
+    const {initializeLoadingPointer, fetchWeatherDataPointer: getCurrentWeatherPointer, isLoading, error, data} = useCurrentWeather();
     const [state, setState] = useState(initialState);
     const {city, searchBegan, initialReq, initialReqHandler} = props;
     const history = useHistory();
@@ -17,7 +19,7 @@ const CurrentWeatherContextProvider = props => {
         }
 
         if (city !== '') {
-            getCurrentWeatherPointer(city);
+            getCurrentWeatherPointer(city, kindOfQuery.CURRENT_WEATHER);
         }
     }, [city, initializeLoadingPointer, getCurrentWeatherPointer, searchBegan])
 

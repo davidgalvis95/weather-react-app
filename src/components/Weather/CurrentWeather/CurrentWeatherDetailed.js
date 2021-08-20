@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./CurrentWeather.module.css";
-import Card from "../../hoc/Card/Card";
-import SunnyWithClouds from "../Icons/weather/SunnyWithClouds";
+import Card from "../../../hoc/Card/Card";
+import SunnyWithClouds from "../../Icons/weather/SunnyWithClouds";
 
 
 const propertiesToDetail = [
