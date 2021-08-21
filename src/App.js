@@ -10,6 +10,8 @@ import NotFound from "./components/NotFound/NotFound";
 import Layout from "./hoc/Layout/Layout";
 import Weather from "./components/Weather/Weather";
 import {useSelector} from "react-redux";
+import {useHistory} from "react-router-dom"
+import GreetingComponent from "./components/GreetingComponent/GreetingComponent"
 
 function App() {
 
@@ -18,23 +20,20 @@ function App() {
   const routes = (
     <Switch>
       <Route path="/main-search" component={MainSearch} />
-      <Route path="/not-found" component={NotFound} />
+      {/* <Route path="/not-found" component={NotFound} /> */}
       <Route
         path="/current-weather"
-        render={() => {
-          if (!searchStatus.searchBegan && searchStatus.city === null) {
-            return <Redirect to="/" />;
-          } else {
-            return <Weather/>
-          }
-        }}
+        component={Weather}
+        // component={NotFound}
+        // render={() => {
+        //   if (!searchStatus.searchBegan && searchStatus.city === null) {
+        //     return <Redirect to="/" />;
+        //   } else {
+        //     return <Weather/>
+        //   }
+        // }}
       />
-      <Route path="/" render={() => {
-        setTimeout(() => {
-          return <Redirect to="/main-search" />;
-        }, 2000);
-      }}/>
-      {/* <Route component={NotFound}/> */}
+      <Route path="/" component={GreetingComponent}/>
     </Switch>
   );
 

@@ -34,7 +34,7 @@ const currentWeatherSpecification = {
 const useTransformWeatherData = () => {
   // const [result, setResult] = useState(currentWeatherSpecification);
 
-  const transformData = (data) => {
+  const transformCurrentWeatherData = (data) => {
     if (data) {
       const result = { ...currentWeatherSpecification };
       result.temperature = result.mapTemperature(data.main.temp, "kc");
@@ -55,7 +55,7 @@ const useTransformWeatherData = () => {
     return currentWeatherSpecification;
   };
 
-  return { transformData: transformData };
+  return { transformCurrentWeatherData: transformCurrentWeatherData };
 };
 
 const getTimeFromTimestamp = (timestamp) => {

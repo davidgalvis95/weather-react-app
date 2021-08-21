@@ -7,8 +7,14 @@ const sendRequest = () => {
 const processResponse = (data, query) => {
     return {
         type: "PROCESS_RESPONSE",
-        forecastData: data,
+        responseData: data,
         query: query
+    }
+}
+
+const stopLoader = () => {
+    return {
+        type: "STOP_LOADER"
     }
 }
 
@@ -28,6 +34,7 @@ const clearError = () => {
 export default {
     sendRequest,
     processResponse,
+    stopLoader,
     handleError,
     clearError,
 }

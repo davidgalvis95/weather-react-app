@@ -8,14 +8,14 @@ import { useSelector } from "react-redux";
 const CurrentWeatherParent = (props) => {
   const { data, error } = useSelector((state) => state.weatherApi);
   const [renderDetails, setRenderDetails] = useState(false);
-  const { transformData } = useTransformWeatherData();
+  const { transformCurrentWeatherData } = useTransformWeatherData();
   const [time, setTime] = useState("");
   const [transformedData, setTransformedData] = useState();
   let intervalId = null;
 
   useEffect(() => {
-    if (!isEmpty(data)) {
-      const newData = transformData(data);
+    if (!isEmpty(data) && data.currentWeather && data.forecast5d3h) {
+      const newData = transformCurrentWeatherData(data.currentWeather);
       setTransformedData(newData);
     }
   // eslint-disable-next-line

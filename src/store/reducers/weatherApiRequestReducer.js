@@ -13,19 +13,17 @@ export const kindOfQuery = {
 };
 
 const processResponseHandler = (state, data, query) => {
-  switch (query) {
+  const splitQuery = query.split("=")[0].concat("=");
+
+  switch (splitQuery) {
     case kindOfQuery.CURRENT_WEATHER:
       return {
         ...state,
-        loading: true,
-        error: null,
         data: { ...state.data, currentWeather: data },
       };
     case kindOfQuery.HOURS_DAYS_FORECAST:
       return {
         ...state,
-        loading: true,
-        error: null,
         data: { ...state.data, forecast5d3h: data },
       };
     default:
@@ -39,6 +37,8 @@ const weatherApiRequestReducer = (state = defaultState, action) => {
       return { ...state, loading: true };
     case "PROCESS_RESPONSE":
       return processResponseHandler(state, action.responseData, action.query);
+    case "STOP_LOADER":
+      return { ...state, loading: false };
     case "HANDLE_ERROR":
       return {
         ...state,
@@ -54,7 +54,7 @@ const weatherApiRequestReducer = (state = defaultState, action) => {
         data: { ...state.data, currentWeather: null, forecast5d3h: null },
       };
     default:
-      return defaultState;
+      return state;
   }
 };
 

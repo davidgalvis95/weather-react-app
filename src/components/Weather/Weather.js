@@ -5,16 +5,17 @@ import Search from './CurrentWeather/Search/Search';
 import CurrentWeatherParent from './CurrentWeather/CurrentWeatherParentComp';
 import WeatherForecastParent from './WeatherForecast/WeatherForecastParent';
 import { useSelector } from "react-redux";
+import MainSearch from "../MainSearch/MainSearch"
 
 
 const Weather = () => {
-  const searchState = useSelector((state) => state.searchState)
+  const searchState = useSelector((state) => state.searchStatus)
   const { loading } = useSelector((state) => state.weatherApi);
   const { fetchWeatherDataPointer } = useWeatherQuery();
   const history = useHistory();
 
   useEffect(() => {
-    if (!searchState.searchBegan && searchState.city === null) {
+    if (searchState.city === null && !searchState.searchBegan) {
       history.replace("/");
     }
 
@@ -22,10 +23,22 @@ const Weather = () => {
       fetchWeatherDataPointer(searchState.city);
     }
   // eslint-disable-next-line
-  }, [searchState.city, fetchWeatherDataPointer, searchState.searchBegan]);
+  }, [searchState.city, searchState.searchBegan]);
 
-  let weatherComponent = <h1>Loading...</h1>;
-  if (searchState.initialRequest && !loading) {
+  //TODO handle this with react router to avoid page blinking
+  let weatherComponent = <MainSearch/>;
+  if(searchState.initialRequest){
+    weatherComponent = <h1>Loading...</h1>;
+    if (!loading) {
+      weatherComponent = (
+        <div>
+          <Search />
+          <CurrentWeatherParent isInitialReq={searchState.initialRequest} />
+          <WeatherForecastParent isInitialReq={searchState.initialRequest} />
+        </div>
+      );
+    }
+  }else{
     weatherComponent = (
       <div>
         <Search />
@@ -35,7 +48,7 @@ const Weather = () => {
     );
   }
 
-  return { weatherComponent };
-};
+  return weatherComponent;
+}
 
 export default Weather;

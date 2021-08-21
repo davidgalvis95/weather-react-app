@@ -4,9 +4,10 @@ import allActions from "../../../../store/actions/allActions";
 import useWeatherQuery from "../../../../hooks/useWeatherQuery";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Search = () => {
-  const searchState = useSelector((state) => state.searchState);
+  const searchState = useSelector((state) => state.searchStatus);
   const apiDataState = useSelector((state) => state.weatherApi);
   const { fetchWeatherDataPointer } = useWeatherQuery();
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const Search = () => {
           value={citySearch}
         />
         <div className={classes.loaderWrapper}>
-          {apiDataState.loading && !searchState.initialRequest ? (
+          {apiDataState.loading && searchState && !searchState.initialRequest ? (
             <div className={classes.loader} />
           ) : null}
         </div>

@@ -4,11 +4,7 @@ import { simulatedCurrentWeather } from "../util/SimulatedApiData/simulatedWeath
 import { simulated3h5dForecastData } from "../util/SimulatedApiData/simulated3h5dForecastData";
 import { useDispatch } from "react-redux";
 import allActions from "../store/actions/allActions";
-
-export const kindOfQuery = {
-  CURRENT_WEATHER: 'weather?q=',
-  HOURS_DAYS_FORECAST: 'forecast?q='
-}
+import { kindOfQuery } from "../store/reducers/weatherApiRequestReducer";
 
 const useCurrentWeather = () => {
   // const [state, dispatch] = useReducer(weatherRequestReducer, initialState);
@@ -41,18 +37,20 @@ const useCurrentWeather = () => {
   //   }, []);
 
   const sendRequestForWeather = useCallback(async (city) => {
-    const forecastQuery = `someCurrentQuery${city}`;
-    const currentQuery = `someForecastQuery${city}`;
-    dispatch(allActions.weatherApiActions.sendRequest());
+
+    const weatherApiActions = allActions.weatherApiActions;
+    dispatch(weatherApiActions.sendRequest());
  
     try {
       //const result = await api.get(query);
       const result = await Promise.all([fakeGetApiCall(city), fakeGetApiForecastCall(city)]);
-      dispatch(allActions.weatherApiActions.processResponse(result.data, currentQuery));
-      dispatch(allActions.weatherApiActions.processResponse(result.data, forecastQuery));
+
+      dispatch(weatherApiActions.processResponse((result[0]).data, `${kindOfQuery.CURRENT_WEATHER}${city}`));
+      dispatch(weatherApiActions.processResponse((result[1]).data, `${kindOfQuery.HOURS_DAYS_FORECAST}${city}`));
+      dispatch(weatherApiActions.stopLoader());
     } catch (error) {
       console.log(error);
-      dispatch(allActions.weatherApiActions.handleError(error));
+      dispatch(weatherApiActions.handleError(error));
     }
   // eslint-disable-next-line
   }, []);
@@ -89,7 +87,7 @@ const useCurrentWeather = () => {
   const fakeGetApiCall = (city) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve({ data: {...simulatedCurrentWeather}});
+        resolve({ data: simulatedCurrentWeather});
       }, 3000);
     });
   };
@@ -97,7 +95,7 @@ const useCurrentWeather = () => {
   const fakeGetApiForecastCall = (city) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve({ data: {...simulated3h5dForecastData}});
+        resolve({ data: simulated3h5dForecastData});
       }, 3000);
     });
   };

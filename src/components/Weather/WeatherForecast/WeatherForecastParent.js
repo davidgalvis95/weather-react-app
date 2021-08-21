@@ -4,14 +4,15 @@ import { useSelector } from "react-redux"
 
 const WeatherForecastParent = (props) => {
 
-    const {loading, error, forecastData} = useSelector((state) => state.weatherShortForecast);
+    const {loading, error, forecastData} = useSelector((state) => state.weatherApi);
 
     
 
     return (
-        <div className="weather">
-            <CardsForecast data={forecastData}/>
-        </div>
+        <h1>Weather Forecast</h1>
+        // <div className="weather">
+        //     <CardsForecast data={forecastData}/>
+        // </div>
     )
 }
 

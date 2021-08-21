@@ -20,16 +20,16 @@ const searchStatusReducer = (state = defaultState, action) => {
         initialRequest: false,
         city: action.city,
       };
-      case "END_SEARCH":
-        return {
-          ...state,
-          searchBegan: false,
-          initialRequest: false,
-          city: null,
-        }
-        default:
-          return defaultState;
+    case "END_SEARCH":
+      return {
+        ...state,
+        searchBegan: false,
+        initialRequest: false,
+        city: null,
+      };
+    default:
+      return state;
   }
-}
+};
 
 export default searchStatusReducer;
