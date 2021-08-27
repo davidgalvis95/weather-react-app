@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 2vw;
+    text-transform: uppercase;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.horizontal_slider {
+    display: block;
+    margin: auto;
+    width: 97%;
+    overflow-x: scroll;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #eee;
+}
+
+/* TODO make these props appear when it's mobile screen */
+/*this is for chrome / firefox/ opera and safari*/
+/* .horizontal_slider::-webkit-scrollbar {
+    display: none;
+} */
+
+/* for ms*/
+/* .horizontal_slider {
+    -ms-overflow-style: none;
+} */
+
+.slider_container {
+    display: block;
+    white-space: nowrap;
+}
+
+.item {
+    display: inline-block;
+    margin-right: 10px;
+    background-color: green;
+}
+
+/* .item img {
+    width: 100px;
+    height: 225px;
+    object-fit: cover;
+} */
