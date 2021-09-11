@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import Card from 'react-bootstrap/Card'
-import ListGroup from 'react-bootstrap/ListGroup'
-import ListGroupItem from 'react-bootstrap/ListGroupItem'
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import { Grid, Box } from "@material-ui/core";
+import classes from "./CardForecast.module.css";
 
 const CardForecast = ({
   weatherIconSource,
@@ -10,52 +11,77 @@ const CardForecast = ({
   temperature,
   humidity,
   windSpeed,
+  visibility,
 }) => {
-  // return (
-  //   <div className="card text-center bg-dark animate__animated animate__fadeInUp">
-  //     <div className="overflow">
-  //       <img
-  //         src={weatherIconSource}
-  //         alt="a wallpaper"
-  //         className="card-img-top"
-  //       />
-  //     </div>
-  //     <div className="card-body text-light">
-  //       <h4 className="card-title">{description}</h4>
-  //       <p className="card-text text-secondary">
-  //         {temperature ? temperature : "0"}
-  //       </p>
-  //       <p className="card-text text-secondary">{humidity ? humidity : "0"}</p>
-  //       <p className="card-text text-secondary">
-  //         {windSpeed ? windSpeed : "0"}
-  //       </p>
-  //     </div>
-  //   </div>
-  // );
+  const [descriptors, setDescriptors] = useState([]);
+
+  useEffect(() => {
+    const mapForecastDescriptions = new Map();
+    const iterator = mapForecastDescriptions.entries();
+    const descriptions = new Array();
+
+    // TODO make this dynamic for farenheit and celsius
+    mapForecastDescriptions.set("Temperature", temperature.concat(" °C"));
+    mapForecastDescriptions.set("Wind Speed", windSpeed);
+    mapForecastDescriptions.set("Humidity", humidity);
+    mapForecastDescriptions.set("Visibility", visibility);
+
+    mapForecastDescriptions.forEach((description) => {
+      descriptions.push(iterator.next().value);
+    });
+    setDescriptors(descriptions);
+  }, []);
+
+  const handleCardSelection = () => {
+
+  };
 
   return (
-    <div>
-      <Card style={{ width: "10rem" }}>
-        {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
-        {weatherIconSource}
+    <Card className={classes.item}>
+      <Card.Title className={classes.cardTitle}>Monday 30th</Card.Title>
+      <div className={classes.iconSpan}>{weatherIconSource}</div>
+      <div onClick={handleCardSelection}>
         <Card.Body>
-          <Card.Title>{description}</Card.Title>
-          {/* <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text> */}
+          <Card.Title className={classes.cardTitle}>{description}</Card.Title>
         </Card.Body>
-        <ListGroup className="list-group-flush">
-          <ListGroupItem>{temperature}</ListGroupItem>
-          <ListGroupItem>{humidity}</ListGroupItem>
-          <ListGroupItem>{windSpeed}</ListGroupItem>
-        </ListGroup>
+        <div style={{ marginTop: "10px", marginBottom: "10px" }}>
+          {descriptors
+            ? descriptors.map((descriptor) => {
+                return (
+                  <Grid container>
+                    <Grid item xs={8}>
+                      <Box>
+                        <p className={classes.descriptionGrid}>
+                          {descriptor[0]}
+                        </p>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={4}>
+                      <Box>
+                        <p className={classes.descriptionGrid}>
+                          {descriptor[1]}
+                        </p>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                );
+              })
+            : null}
+        </div>
         <Card.Body>
-          <Card.Link href="#">View Details</Card.Link>
-          {/* <Card.Link href="#">Another Link</Card.Link> */}
+          <div className={classes.buttonContainer}>
+            <Button
+              className={classes.buttonDetails}
+              variant="contained"
+              size="small"
+            >
+              View Details
+            </Button>
+          </div>
+          <div style={{height:"2px"}}></div>
         </Card.Body>
-      </Card>
-    </div>
+      </div>
+    </Card>
   );
 };
 

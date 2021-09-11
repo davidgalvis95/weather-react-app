@@ -47,7 +47,7 @@ const CurrentWeather = (props) => {
           </table>
         </div>
         <div className={classes.buttonContainer}>
-          <button onClick={displayDetails}>Details →</button>
+          <button className={classes.currentWeatherButton} onClick={displayDetails}>Details →</button>
         </div>
       </Card>
     </section>

@@ -1,0 +1,57 @@
+/* .iconSpan{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Teko&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Teko&family=Yanone+Kaffeesatz:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&family=Teko&family=Yanone+Kaffeesatz:wght@300&display=swap');
+
+.cardTitle {
+    color: white;
+    width: 50%;
+    margin: auto;
+    padding-top: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    text-align: center;
+}
+
+.item {
+    background: rgb(42,60,53);
+    background: linear-gradient(0deg, rgba(42,60,53,0.865983893557423) 0%, rgba(0,0,0,1) 100%);
+    width: 9rem;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.descriptionGrid {
+    font-family: 'Urbanist', sans-serif;
+    font-size: small;
+    color: white;
+    margin-left: 5%;
+    margin-top: 3px;
+}
+
+.buttonDetails{
+    font-family: 'Urbanist', sans-serif;
+    background-color: #c7ecee;
+    border: none;
+    display: block;
+    margin: auto;
+    padding:3%;
+    border-radius: 3px;
+}
+
+.buttonDetails:active {
+    background-color: #a5b1c2;
+}
+
+.buttonContainer {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

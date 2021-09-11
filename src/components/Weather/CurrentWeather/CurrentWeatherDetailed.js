@@ -90,7 +90,7 @@ const CurrentWeatherDetailed = (props) => {
         <div className={`${classes.title} ${classes.subtitle}`}>Details</div>
         {renderWeatherDetailsData()}
         <div className={classes.buttonContainer}>
-          <button onClick={displayResume}>Go back →</button>
+          <button className={classes.currentWeatherButton} onClick={displayResume}>Go back →</button>
         </div>
       </Card>
       {/*<Card>Something</Card>*/}

@@ -36,11 +36,50 @@ h1 {
     white-space: nowrap;
 }
 
-.item {
+.weatherForecastItems{
     display: inline-block;
     margin-right: 10px;
-    background-color: green;
 }
+
+
+.item {
+    background: rgb(42,60,53);
+    background: linear-gradient(0deg, rgba(42,60,53,0.865983893557423) 0%, rgba(0,0,0,1) 100%);
+    width: 9rem;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.itemSelected {
+    display: inline-block;
+    margin-right: 10px;
+    background: rgb(42,60,53);
+    background: linear-gradient(0deg, rgba(42,60,53,0.865983893557423) 0%, rgba(0,0,0,1) 100%);
+    width: 9rem;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.iconGeneralProps {
+    display: block;
+    height: 80px;
+    width: 80px;
+    margin: auto;
+}
+
+.sunnyIconColors {
+    background-color: 0a3d62;
+    color: #f5f6fa;
+    border-color: transparent;
+}
+
+.iconSelectedColors {
+    background-color: 0a3d62;
+    color: #f5f6fa;
+    border-color: transparent;
+}
+
+
 
 /* .item img {
     width: 100px;

@@ -23,7 +23,7 @@
     width: 70rem;
 }
 
-button {
+.currentWeatherButton {
     border: #3c6382;
     float: right;
     margin-top: 0.5rem;
@@ -37,7 +37,7 @@ button {
     cursor: pointer;
 }
 
-button:active {
+.currentWeatherButton:active {
     background-color: #a5b1c2;
 }
 
