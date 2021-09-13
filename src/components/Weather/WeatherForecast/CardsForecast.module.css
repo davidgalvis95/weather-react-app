@@ -17,7 +17,8 @@ h1 {
     overflow-x: scroll;
     padding: 20px;
     box-sizing: border-box;
-    background-color: #eee;
+    /* background-color: #eee; */
+    background-color: transparent;
 }
 
 /* TODO make these props appear when it's mobile screen */

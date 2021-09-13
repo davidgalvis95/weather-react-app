@@ -1,15 +1,15 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import useWeatherQuery from "../../hooks/useWeatherQuery";
-import Search from './CurrentWeather/Search/Search';
-import CurrentWeatherParent from './CurrentWeather/CurrentWeatherParentComp';
-import WeatherForecastParent from './WeatherForecast/WeatherForecastParent';
+import Search from "./CurrentWeather/Search/Search";
+import CurrentWeatherParent from "./CurrentWeather/CurrentWeatherParentComp";
+import WeatherForecastParent from "./WeatherForecast/WeatherForecastParent";
 import { useSelector } from "react-redux";
-import MainSearch from "../MainSearch/MainSearch"
-
+import MainSearch from "../MainSearch/MainSearch";
+import classes from "./Weather.module.css"
 
 const Weather = () => {
-  const searchState = useSelector((state) => state.searchStatus)
+  const searchState = useSelector((state) => state.searchStatus);
   const { loading } = useSelector((state) => state.weatherApi);
   const { fetchWeatherDataPointer } = useWeatherQuery();
   const history = useHistory();
@@ -22,33 +22,37 @@ const Weather = () => {
     if (searchState.city !== null) {
       fetchWeatherDataPointer(searchState.city);
     }
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [searchState.city, searchState.searchBegan]);
 
   //TODO handle this with react router to avoid page blinking
-  let weatherComponent = <MainSearch/>;
-  if(searchState.initialRequest){
+  let weatherComponent = <MainSearch />;
+  if (searchState.initialRequest) {
     weatherComponent = <h1>Loading...</h1>;
     if (!loading) {
       weatherComponent = (
         <div>
-          <Search />
-          <CurrentWeatherParent isInitialReq={searchState.initialRequest} />
+          <div className={classes.searchAndCurrentWeather}>
+            <Search />
+            <CurrentWeatherParent isInitialReq={searchState.initialRequest} />
+          </div>
           <WeatherForecastParent isInitialReq={searchState.initialRequest} />
         </div>
       );
     }
-  }else{
+  } else {
     weatherComponent = (
       <div>
-        <Search />
-        <CurrentWeatherParent isInitialReq={searchState.initialRequest} />
+          <div className={classes.searchAndCurrentWeather}>
+          <Search />
+          <CurrentWeatherParent isInitialReq={searchState.initialRequest} />
+        </div>
         <WeatherForecastParent isInitialReq={searchState.initialRequest} />
       </div>
     );
   }
 
   return weatherComponent;
-}
+};
 
 export default Weather;

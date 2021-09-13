@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./CurrentWeather.module.css";
 import Card from "../../../hoc/Card/Card";
-import SunnyWithClouds from "../../Icons/weather/SunnyWithClouds";
+// import SunnyWithClouds from "../../Icons/weather/SunnyWithClouds";
 
 
 const propertiesToDetail = [
@@ -73,7 +73,7 @@ const CurrentWeatherDetailed = (props) => {
           <div>
             <div>
               {/*TODO think how to make this to work dynamically*/}
-              <SunnyWithClouds className={classes.iconClass} />
+              {/* <SunnyWithClouds className={classes.iconClass} /> */}
             </div>
             <p>{data.description}</p>
           </div>

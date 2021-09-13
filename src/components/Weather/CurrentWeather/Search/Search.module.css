@@ -5,22 +5,23 @@
     display: flex;
     flex-direction: column;
 
-    background: #88bdbc;
+    background: transparent;
 }
 
 .searchBox {
     /*z-index: 1;*/
     /*position: absolute;*/
     margin: auto;
-    /*margin-top: 1rem;*/
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
     /*padding-top: 1rem;*/
     top: 50%;
     left: 50%;
     /*transform: translate(-50%, -50%);*/
-    background: #f1f2f6;
+    background: white;
     height: 10px;
-    width: 180px;
-    border-radius: 2px;
+    width: 250px;
+    border-radius: 12px;
     padding: 5px 10px 12px;
 }
 
@@ -31,7 +32,7 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: #f1f2f6;
+    background: white;
     display: flex;
     justify-content: center;
     align-items: center;

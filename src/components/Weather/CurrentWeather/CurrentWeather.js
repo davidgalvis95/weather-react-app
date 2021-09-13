@@ -1,53 +1,99 @@
 import Card from "../../../hoc/Card/Card";
 import classes from "./CurrentWeather.module.css";
-import SunnyWithClouds from "../../Icons/weather/SunnyWithClouds";
+import { WiDaySunny } from "weather-icons-react";
+import ViewDetailsButton from "../../../hoc/ViewDetailsButton";
+import { Grid, Box, Container } from "@material-ui/core";
 
 const CurrentWeather = (props) => {
-
   const { data, time, renderCurrentWeatherDetails } = props;
 
   const displayDetails = () => {
     renderCurrentWeatherDetails();
   };
 
+  const capitalize = (str) => {
+    const arr = str.split(" ");
+
+    for (var i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+    }
+    return arr.join(" ");
+  };
+
   return (
     // <div>X</div>
     <section className={classes.weather}>
-      <Card>
+      <Card className={classes.cardComplement}>
         <div className={classes.title}>Current Weather</div>
         {/* TODO use the time function to update this time */}
         <p className={classes.time}>{time}</p>
-        <div className={classes.weatherSections}>
-          <div>
-            <div>
-              {/*TODO think how to make this to work dynamically*/}
-              {/*<WiDaySunnyOvercast className={classes.iconClass}/>*/}
-              <SunnyWithClouds className={classes.iconClass} />
+        <Grid container>
+          <Grid item xs={6} sm={6} md={3}>
+            <Box>
+              <div className={classes.iconSectionContainer}>
+                <div>
+                  <WiDaySunny
+                    className={`${classes.iconGeneralProps} ${classes.iconColors}`}
+                  />
+                </div>
+                <p className={classes.description}>
+                  {data && capitalize(data.description)}
+                </p>
+              </div>
+            </Box>
+          </Grid>
+          <Grid item xs={6} sm={6} md={4}>
+            {/* <Box> */}
+            <div className={classes.temperature}>
+              {data && data.temperature}°C
             </div>
-            <p>{data && data.description}</p>
+            {/* </Box> */}
+          </Grid>
+          <Grid container xs={12} sm={12} md={5}>
+            <Grid item xs={12}>
+              <div
+                className={classes.descriptionRows}
+                style={{ marginBottom: "0px", paddingBottom: "0px" }}
+              >
+                <div className={classes.gridSections}>
+                  <p>Air quality</p>
+                </div>
+                <div className={classes.airQualityText}>
+                  <p>Excellent</p>
+                </div>
+              </div>
+            </Grid>
+            <Grid item xs={12}>
+              <div className={classes.descriptionRows}>
+                <div className={classes.gridSections}>
+                  <p>Wind speed</p>
+                </div>
+                <div className={classes.gridSections}>
+                  <p>{data && data.windSpeed} km/h</p>
+                </div>
+              </div>
+            </Grid>
+            <Grid item xs={12}>
+              <div className={classes.descriptionRows}>
+                <div className={classes.gridSections}>
+                  <p>Humidity</p>
+                </div>
+                <div className={classes.gridSections}>
+                  <p>{data && data.humidity}%</p>
+                </div>
+              </div>
+            </Grid>
+          </Grid>
+        </Grid>
+        <div className={classes.buttonWrapper}>
+          <div style={{ width: "87px", height: "35px", marginTop: "7px" }}>
+            <ViewDetailsButton
+              className={classes.currentWeatherButton}
+              execution={displayDetails}
+            />
           </div>
-          <div className={classes.temperature}>
-            {data && data.temperature}°C
-          </div>
-          <table className={classes.detailsTable}>
-            <tbody>
-              <tr>
-                <td>Air quality</td>
-                <td className={classes.airQualityText}>Excellent</td>
-              </tr>
-              <tr>
-                <td>Wind speed</td>
-                <td>{data && data.windSpeed} km/h</td>
-              </tr>
-              <tr>
-                <td>Humidity</td>
-                <td>{data && data.humidity}%</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div className={classes.buttonContainer}>
-          <button className={classes.currentWeatherButton} onClick={displayDetails}>Details →</button>
+
+          {/* <button >Details →</button> */}
         </div>
       </Card>
     </section>

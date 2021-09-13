@@ -1,137 +1,194 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Teko&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Teko&family=Yanone+Kaffeesatz:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&family=Teko&family=Yanone+Kaffeesatz:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Teko&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Teko&family=Yanone+Kaffeesatz:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&family=Teko&family=Yanone+Kaffeesatz:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@300&display=swap");
+
+/* WEATHER AND CARD GENERIC STYLES*/
+/* ================================================================= */
+
+.cardComplement {
+  background: rgb(42, 60, 53);
+  background: linear-gradient(
+    0deg,
+    rgba(42, 60, 53, 0.865983893557423) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
 
 .weather {
-    display: flex;
-    background-color: #88bdbc;
+  display: flex;
+  background-color: transparent;
 }
 
-.weatherSections {
-    display: flex;
-    justify-content: center;
-}
-
-.weatherSections p {
-    font-family: 'Barlow', sans-serif;
-    font-size: small;
-    font-weight: lighter;
-}
-
-.card{
-    width: 70rem;
-}
-
-.currentWeatherButton {
-    border: #3c6382;
-    float: right;
-    margin-top: 0.5rem;
-    margin-bottom: 0;
-    font-family: 'Yanone Kaffeesatz', sans-serif;
-    font-weight: bold;
-    font-size: large;
-    padding: 4px;
-    border-radius: 2px;
-    background-color: #c7ecee;
-    cursor: pointer;
-}
-
-.currentWeatherButton:active {
-    background-color: #a5b1c2;
-}
+/* TITLE AND HEADERS*/
+/* ================================================================= */
 
 .title {
-    font-weight: bold;
-    font-size: x-large;
-    font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: bold;
+  font-size: x-large;
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  color: #f5f6fa;
 }
 
 .time {
-    margin-top: 0;
-    font-size: small;
-    color: #3c6382;
-    font-weight: bold;
-    font-family: 'PT Sans Narrow', sans-serif;
+  margin-top: 0;
+  font-size: small;
+  color: #e77f67;
+  font-weight: bold;
+  font-family: "PT Sans Narrow", sans-serif;
 }
 
-.iconClass {
-    display: block;
-    height: 70px;
-    width: 70px;
-    margin: auto;
-    padding-top: 10px;
+/* WEATHER SECTIONS*/
+/* ================================================================= */
+
+.iconGeneralProps {
+  display: block;
+  height: 120px;
+  width: 120px;
+  margin: auto;
 }
 
-.detailsTable td {
-    font-family: 'Barlow', sans-serif;
-    border: black;
-    padding-right: 2rem;
-    padding-left: 1rem;
-    font-size: small;
+@media only screen and (max-width: 600px) {
+  .iconGeneralProps {
+    height: 80px;
+    width: 80px;
+  }
 }
 
-.detailsTable tr:nth-child(odd) {
-    background-color: #ccc;
+.iconColors {
+  background-color: 0a3d62;
+  color: #f5f6fa;
+  border-color: transparent;
 }
 
-.airQualityText{
-    background-color: #7bed9f;
+.description {
+  text-align: center;
+  color: #f5f6fa;
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .temperature {
-    font-family: 'Barlow', sans-serif;
-    font-size: 50px;
-    margin: auto;
-    max-width: 80px;
+  font-family: "Urbanist", sans-serif;
+  font-size: 50px;
+  margin: auto;
+  margin-top: 35px;
+  max-width: 80px;
+  color: #f5f6fa;
+  font-weight: bold;
+  /* flex-grow: 1; */
 }
 
-.temperatureFontSize {
-
+.descriptionRows {
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  margin-bottom: 0;
+  /* margin-right: 0%; */
 }
 
+.descriptionRows p {
+  margin-top: 5px;
+  font-family: "Urbanist", sans-serif;
+}
 
-/*DETAILED*/
+.airQualityText {
+  background-color: #7bed9f;
+  width: 99%;
+  text-align: center;
+}
+
+.gridSections {
+  background-color: #ccc;
+  width: 99%;
+  height: 100%;
+  text-align: center;
+}
+
+/* FINAL SECTION OR BUTTON*/
+/* ================================================================= */
+
+.buttonWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* TRASH*/
+/* ================================================================= */
+
+.weatherSections {
+  display: flex;
+  justify-content: center;
+}
+
+.weatherSections p {
+  font-family: "Barlow", sans-serif;
+  font-size: small;
+  font-weight: lighter;
+}
+
+.buttonContainer {
+  width: 20%;
+  margin-left: 82.5%;
+}
+
+.iconClass {
+  display: block;
+  height: 70px;
+  width: 70px;
+  margin: auto;
+  padding-top: 10px;
+}
+
+.detailsTable td {
+  font-family: "Barlow", sans-serif;
+  border: black;
+  padding-right: 2rem;
+  padding-left: 1rem;
+  font-size: small;
+}
+
+.detailsTable tr:nth-child(odd) {
+  background-color: #ccc;
+}
+
 .list {
-    list-style: none;
-    margin-left: 0;
-    padding-left: 0;
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .subtitle {
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-    font-size: x-large;
-    text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: x-large;
+  text-align: center;
 }
 
 .detailsTable2 td {
-    width: 82px;
+  width: 82px;
 }
 
 .weatherSectionsWellSpaced {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .realFeel {
-    font-family: 'Barlow', sans-serif;
-    font-size: 20px;
-    margin: auto;
+  font-family: "Barlow", sans-serif;
+  font-size: 20px;
+  margin: auto;
 }
 
 .realFeel p {
-    font-size: 20px;
-    margin-top: 0.5rem;
+  font-size: 20px;
+  margin-top: 0.5rem;
 }
 
 .realFeel h5 {
-    font-weight: normal;
-    font-size: 15px;
-    margin-bottom: 0;
-}
-
-.temperatureDetailed {
-    /*margin-left: 3rem;*/
-    /*margin-right: 3rem;*/
+  font-weight: normal;
+  font-size: 15px;
+  margin-bottom: 0;
 }

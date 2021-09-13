@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 import classes from './Navbar.module.css';
-import WeatherLogo from '../Icons/WeatherLogo';
+import WeatherLogo from '../Icons/weather/WeatherLogo';
 
 const navbar = () => {
     return (

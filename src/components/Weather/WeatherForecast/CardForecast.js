@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { Grid, Box } from "@material-ui/core";
 import classes from "./CardForecast.module.css";
+import ViewDetailsButton from "../../../hoc/ViewDetailsButton"
 
 const CardForecast = ({
   weatherIconSource,
@@ -69,16 +70,7 @@ const CardForecast = ({
             : null}
         </div>
         <Card.Body>
-          <div className={classes.buttonContainer}>
-            <Button
-              className={classes.buttonDetails}
-              variant="contained"
-              size="small"
-            >
-              View Details
-            </Button>
-          </div>
-          <div style={{height:"2px"}}></div>
+          <ViewDetailsButton/>
         </Card.Body>
       </div>
     </Card>
