@@ -2,7 +2,7 @@ import Card from "../../../hoc/Card/Card";
 import classes from "./CurrentWeather.module.css";
 import { WiDaySunny } from "weather-icons-react";
 import ViewDetailsButton from "../../../hoc/ViewDetailsButton";
-import { Grid, Box, Container } from "@material-ui/core";
+import { Grid, Box } from "@material-ui/core";
 
 const CurrentWeather = (props) => {
   const { data, time, renderCurrentWeatherDetails } = props;
@@ -21,7 +21,6 @@ const CurrentWeather = (props) => {
   };
 
   return (
-    // <div>X</div>
     <section className={classes.weather}>
       <Card className={classes.cardComplement}>
         <div className={classes.title}>Current Weather</div>
@@ -43,13 +42,11 @@ const CurrentWeather = (props) => {
             </Box>
           </Grid>
           <Grid item xs={6} sm={6} md={4}>
-            {/* <Box> */}
             <div className={classes.temperature}>
               {data && data.temperature}°C
             </div>
-            {/* </Box> */}
           </Grid>
-          <Grid container xs={12} sm={12} md={5}>
+          <Grid container xs={12} sm={12} md={5} rowSpacing="0" gap="1">
             <Grid item xs={12}>
               <div
                 className={classes.descriptionRows}
@@ -90,10 +87,9 @@ const CurrentWeather = (props) => {
             <ViewDetailsButton
               className={classes.currentWeatherButton}
               execution={displayDetails}
+              label="View Details"
             />
           </div>
-
-          {/* <button >Details →</button> */}
         </div>
       </Card>
     </section>

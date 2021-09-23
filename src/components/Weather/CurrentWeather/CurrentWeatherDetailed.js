@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import classes from "./CurrentWeather.module.css";
+import detailedClasses from "./CurrentWeatherDetailed.module.css";
 import Card from "../../../hoc/Card/Card";
-// import SunnyWithClouds from "../../Icons/weather/SunnyWithClouds";
-
+import { Grid, Box } from "@material-ui/core";
+import WeatherTable from "../../../hoc/Table/WeatherTable";
+import { WiDaySunny } from "weather-icons-react";
+import ViewDetailsButton from "../../../hoc/ViewDetailsButton";
 
 const propertiesToDetail = [
   "description",
@@ -15,85 +18,114 @@ const propertiesToDetail = [
   "windSpeed",
 ];
 
+const tableCellStyle = {
+  width: "60%",
+  backgroundColor: "#78e08f",
+};
+
 const CurrentWeatherDetailed = (props) => {
   const { data, time, renderCurrentWeatherResume } = props;
   const [weatherDetails, setWeatherDetails] = useState({});
 
   useEffect(() => {
-    const detailedData = Object.fromEntries(Object.entries(data).filter(entry => propertiesToDetail.includes(entry[0])));
+    const detailedData = Object.fromEntries(
+      Object.entries(data).filter((entry) =>
+        propertiesToDetail.includes(entry[0])
+      )
+    );
     setWeatherDetails(detailedData);
-  },[data])
+  }, [data]);
 
   const displayResume = () => {
     renderCurrentWeatherResume();
   };
 
+  const capitalize = (str) => {
+    const arr = str.split(" ");
+
+    for (var i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+    }
+    return arr.join(" ");
+  };
+
   const renderWeatherDetailsData = function () {
     const weatherDetailsArray = Object.entries(weatherDetails);
-    const weatherRowDetails = weatherDetailsArray.map((entry, index) => {
-      return (
-        <tr key={index + 1}>
-          <td>{entry[0]}</td>
-          <td>{entry[1]}</td>
-        </tr>
-      );
-    });
 
     const medianIndex =
       (weatherDetailsArray.length / 2) % 2 === 0
         ? weatherDetailsArray.length / 2 + 0.5
         : weatherDetailsArray.length / 2;
-    const firstWeatherDetailsHalf = weatherRowDetails.filter(
-      (row) => row.key <= medianIndex
-    );
-    const secondWeatherDetailsHalf = weatherRowDetails.filter(
-      (row) => row.key >= medianIndex
-    );
+
+    const firstWeatherDetailsHalf = weatherDetailsArray.filter((element, index) => index + 1 <= medianIndex);
+    const secondWeatherDetailsHalf = weatherDetailsArray.filter((element, index) => index + 1 >= medianIndex);
+
+    const headerValues = ["Weather Variable", "Value"];
 
     return (
-      <div className={classes.weatherSections}>
-        <table className={`${classes.detailsTable} ${classes.detailsTable2}`}>
-          <tbody>{firstWeatherDetailsHalf}</tbody>
-        </table>
-        <table className={`${classes.detailsTable} ${classes.detailsTable2}`}>
-          <tbody>{secondWeatherDetailsHalf}</tbody>
-        </table>
-      </div>
+      <Grid container xs={12} sm={12} md={12}>
+        <Grid item xs={6} item>
+          <div style={{marginRight: '5px'}} className={detailedClasses.detailsTableFont}>
+          <WeatherTable
+            headerValues={headerValues}
+            bodyRows={firstWeatherDetailsHalf}
+          />
+          </div>
+
+        </Grid>
+        <Grid item xs={6} item>
+        <div style={{marginLeft: '5px'}} className={detailedClasses.detailsTableFont}>
+          <WeatherTable
+            headerValues={headerValues}
+            bodyRows={secondWeatherDetailsHalf}
+          />
+          </div>
+        </Grid>
+      </Grid>
     );
   };
 
   return (
     <section className={classes.weather}>
-      <Card>
-        <ul className={classes.list}>
-          <li className={classes.title}>Current Weather Details</li>
-          <li className={classes.time}>{time}</li>
-        </ul>
-        <div className={`${classes.weatherSections}`}>
-          <div>
-            <div>
-              {/*TODO think how to make this to work dynamically*/}
-              {/* <SunnyWithClouds className={classes.iconClass} /> */}
+      <Card className={classes.cardComplement}>
+      <div className={classes.title}>Current Weather Details</div>
+        {/* TODO use the time function to update this time */}
+        {/* TODO make the real feel to appear here */}
+        <p className={classes.time}>{time}</p>
+        <div className={detailedClasses.gridVsTableSpacing}>
+        <Grid container>
+          <Grid item xs={6} sm={6} md={6}>
+            <Box>
+              <div className={classes.iconSectionContainer}>
+                <div>
+                  <WiDaySunny
+                    className={`${classes.iconGeneralProps} ${classes.iconColors}`}
+                  />
+                </div>
+                <p className={classes.description}>
+                  {data && capitalize(data.description)}
+                </p>
+              </div>
+            </Box>
+          </Grid>
+          <Grid item xs={6} sm={6} md={6}>
+            <div className={classes.temperature}>
+              {data && data.temperature}°C
             </div>
-            <p>{data.description}</p>
-          </div>
-          <div
-            className={`${classes.temperature} ${classes.temperatureDetailed}`}
-          >
-            {data && data.temperature}°C
-          </div>
-          <div className={classes.realFeel}>
-            <h5>Real Feel</h5>
-            <p>{data && data.realFeel}°C</p>
-          </div>
+          </Grid>
+        </Grid>    
         </div>
-        <div className={`${classes.title} ${classes.subtitle}`}>Details</div>
         {renderWeatherDetailsData()}
-        <div className={classes.buttonContainer}>
-          <button className={classes.currentWeatherButton} onClick={displayResume}>Go back →</button>
+        <div className={classes.buttonWrapper}>
+          <div style={{ width: "87px", height: "35px", marginTop: "7px" }}>
+            <ViewDetailsButton
+              className={classes.currentWeatherButton}
+              execution={displayResume}
+              label="View Resume"
+            />
+          </div>
         </div>
       </Card>
-      {/*<Card>Something</Card>*/}
     </section>
   );
 };

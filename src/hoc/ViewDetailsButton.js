@@ -16,7 +16,7 @@ const ViewDetailsButton = (props) => {
           size="small"
           onClick={executeFunction}
         >
-          View Details
+          {props.label}
         </Button>
       </div>
       <div style={{ height: "2px" }} />
