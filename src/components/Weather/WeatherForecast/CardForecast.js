@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import { Grid, Box } from "@material-ui/core";
 import classes from "./CardForecast.module.css";
-import ViewDetailsButton from "../../../hoc/ViewDetailsButton"
+import WeatherNavigationButton from "../../../hoc/WeatherNavigationButton";
 
 const CardForecast = ({
   weatherIconSource,
@@ -33,9 +32,7 @@ const CardForecast = ({
     setDescriptors(descriptions);
   }, []);
 
-  const handleCardSelection = () => {
-
-  };
+  const handleCardSelection = () => {};
 
   return (
     <Card className={classes.item}>
@@ -70,7 +67,7 @@ const CardForecast = ({
             : null}
         </div>
         <Card.Body>
-          <ViewDetailsButton/>
+          <WeatherNavigationButton label="View Details" />
         </Card.Body>
       </div>
     </Card>

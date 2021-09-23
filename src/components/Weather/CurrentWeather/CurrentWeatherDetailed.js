@@ -5,7 +5,7 @@ import Card from "../../../hoc/Card/Card";
 import { Grid, Box } from "@material-ui/core";
 import WeatherTable from "../../../hoc/Table/WeatherTable";
 import { WiDaySunny } from "weather-icons-react";
-import ViewDetailsButton from "../../../hoc/ViewDetailsButton";
+import WeatherNavigationButton from "../../../hoc/WeatherNavigationButton";
 
 const propertiesToDetail = [
   "description",
@@ -118,7 +118,7 @@ const CurrentWeatherDetailed = (props) => {
         {renderWeatherDetailsData()}
         <div className={classes.buttonWrapper}>
           <div style={{ width: "87px", height: "35px", marginTop: "7px" }}>
-            <ViewDetailsButton
+            <WeatherNavigationButton
               className={classes.currentWeatherButton}
               execution={displayResume}
               label="View Resume"

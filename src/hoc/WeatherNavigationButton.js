@@ -1,7 +1,7 @@
 import classes from "./ViewButtonDetails.module.css"
 import { Button } from "react-bootstrap";
 
-const ViewDetailsButton = (props) => {
+const WeatherNavigationButton = (props) => {
 
   const executeFunction = () => {
     props.execution();
@@ -25,4 +25,4 @@ const ViewDetailsButton = (props) => {
 };
 
 
-export default ViewDetailsButton;
+export default WeatherNavigationButton;
