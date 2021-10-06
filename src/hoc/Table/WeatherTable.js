@@ -60,7 +60,7 @@ const WeatherTable = (props) => {
   return (
     <TableContainer component={Paper} sx={{ borderRadius: 2 }}>
       <Table
-        styles={{ marginLeft: "5px", marginRight: "5px" }}
+        // styles={{ marginLeft: "5px", marginRight: "5px" }}
         aria-label="simple table"
       >
         {header()}

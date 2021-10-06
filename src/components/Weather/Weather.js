@@ -6,7 +6,8 @@ import CurrentWeatherParent from "./CurrentWeather/CurrentWeatherParentComp";
 import WeatherForecastParent from "./WeatherForecast/WeatherForecastParent";
 import { useSelector } from "react-redux";
 import MainSearch from "../MainSearch/MainSearch";
-import classes from "./Weather.module.css"
+import classes from "./Weather.module.css";
+import WeatherDailyForecastParent from "./WeatherDailyForecast/WeatherDailyForecastParent";
 
 const Weather = () => {
   const searchState = useSelector((state) => state.searchStatus);
@@ -37,17 +38,19 @@ const Weather = () => {
             <CurrentWeatherParent isInitialReq={searchState.initialRequest} />
           </div>
           <WeatherForecastParent isInitialReq={searchState.initialRequest} />
+          <WeatherDailyForecastParent/>
         </div>
       );
     }
   } else {
     weatherComponent = (
       <div>
-          <div className={classes.searchAndCurrentWeather}>
+        <div className={classes.searchAndCurrentWeather}>
           <Search />
           <CurrentWeatherParent isInitialReq={searchState.initialRequest} />
         </div>
         <WeatherForecastParent isInitialReq={searchState.initialRequest} />
+        <WeatherDailyForecastParent/>
       </div>
     );
   }

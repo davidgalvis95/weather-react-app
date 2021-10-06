@@ -57,28 +57,37 @@ const CurrentWeatherDetailed = (props) => {
         ? weatherDetailsArray.length / 2 + 0.5
         : weatherDetailsArray.length / 2;
 
-    const firstWeatherDetailsHalf = weatherDetailsArray.filter((element, index) => index + 1 <= medianIndex);
-    const secondWeatherDetailsHalf = weatherDetailsArray.filter((element, index) => index + 1 >= medianIndex);
+    const firstWeatherDetailsHalf = weatherDetailsArray.filter(
+      (element, index) => index + 1 <= medianIndex
+    );
+    const secondWeatherDetailsHalf = weatherDetailsArray.filter(
+      (element, index) => index + 1 >= medianIndex
+    );
 
     const headerValues = ["Weather Variable", "Value"];
 
     return (
       <Grid container xs={12} sm={12} md={12}>
         <Grid item xs={6} item>
-          <div style={{marginRight: '5px'}} className={detailedClasses.detailsTableFont}>
-          <WeatherTable
-            headerValues={headerValues}
-            bodyRows={firstWeatherDetailsHalf}
-          />
+          <div
+            style={{ marginRight: "5px" }}
+            className={detailedClasses.detailsTableFont}
+          >
+            <WeatherTable
+              headerValues={headerValues}
+              bodyRows={firstWeatherDetailsHalf}
+            />
           </div>
-
         </Grid>
         <Grid item xs={6} item>
-        <div style={{marginLeft: '5px'}} className={detailedClasses.detailsTableFont}>
-          <WeatherTable
-            headerValues={headerValues}
-            bodyRows={secondWeatherDetailsHalf}
-          />
+          <div
+            style={{ marginLeft: "5px" }}
+            className={detailedClasses.detailsTableFont}
+          >
+            <WeatherTable
+              headerValues={headerValues}
+              bodyRows={secondWeatherDetailsHalf}
+            />
           </div>
         </Grid>
       </Grid>
@@ -88,32 +97,32 @@ const CurrentWeatherDetailed = (props) => {
   return (
     <section className={classes.weather}>
       <Card className={classes.cardComplement}>
-      <div className={classes.title}>Current Weather Details</div>
+        <div className={classes.title}>Current Weather Details</div>
         {/* TODO use the time function to update this time */}
         {/* TODO make the real feel to appear here */}
         <p className={classes.time}>{time}</p>
         <div className={detailedClasses.gridVsTableSpacing}>
-        <Grid container>
-          <Grid item xs={6} sm={6} md={6}>
-            <Box>
-              <div className={classes.iconSectionContainer}>
-                <div>
-                  <WiDaySunny
-                    className={`${classes.iconGeneralProps} ${classes.iconColors}`}
-                  />
+          <Grid container>
+            <Grid item xs={6} sm={6} md={6}>
+              <Box>
+                <div className={classes.iconSectionContainer}>
+                  <div>
+                    <WiDaySunny
+                      className={`${classes.iconGeneralProps} ${classes.iconColors}`}
+                    />
+                  </div>
+                  <p className={classes.description}>
+                    {data && capitalize(data.description)}
+                  </p>
                 </div>
-                <p className={classes.description}>
-                  {data && capitalize(data.description)}
-                </p>
+              </Box>
+            </Grid>
+            <Grid item xs={6} sm={6} md={6}>
+              <div className={classes.temperature}>
+                {data && data.temperature}°C
               </div>
-            </Box>
+            </Grid>
           </Grid>
-          <Grid item xs={6} sm={6} md={6}>
-            <div className={classes.temperature}>
-              {data && data.temperature}°C
-            </div>
-          </Grid>
-        </Grid>    
         </div>
         {renderWeatherDetailsData()}
         <div className={classes.buttonWrapper}>
