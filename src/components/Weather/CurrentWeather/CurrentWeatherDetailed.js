@@ -100,7 +100,7 @@ const CurrentWeatherDetailed = (props) => {
         <div className={classes.title}>Current Weather Details</div>
         {/* TODO use the time function to update this time */}
         {/* TODO make the real feel to appear here */}
-        <p className={classes.time}>{time}</p>
+        <p className={classes.time}>{time && time}</p>
         <div className={detailedClasses.gridVsTableSpacing}>
           <Grid container>
             <Grid item xs={6} sm={6} md={6}>
