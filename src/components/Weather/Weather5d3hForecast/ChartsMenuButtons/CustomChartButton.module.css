@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@300&display=swap");
+
+.buttonWrapper{
+    background-color: #33415C;
+    height: 30px;
+    width: 120px;
+    margin: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.squareColor {
+    border-color: #fffa65;
+    border-width: thick;
+    background-color: rgba(255, 250, 101, 0.5);
+    display: block;
+    margin: auto;
+    height: 15px;
+    width: 15px;
+}
+
+.text {
+    color: white;
+    font-family: "Urbanist", sans-serif;
+    display: block;
+    margin: auto;
+    font-size: 12px;
+}

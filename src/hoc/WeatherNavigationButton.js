@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 const WeatherNavigationButton = (props) => {
 
   const executeFunction = () => {
+    //TODO define this execution property
     props.execution();
   }
 

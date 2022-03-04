@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import MainSearch from "../MainSearch/MainSearch";
 import classes from "./Weather.module.css";
 import WeatherDailyForecastParent from "./WeatherDailyForecast/WeatherDailyForecastParent";
+import Weather5d3hForecast from './Weather5d3hForecast/Weather5d3hForecastParent'
 
 const Weather = () => {
   const searchState = useSelector((state) => state.searchStatus);
@@ -39,6 +40,7 @@ const Weather = () => {
           </div>
           <WeatherForecastParent isInitialReq={searchState.initialRequest} />
           <WeatherDailyForecastParent/>
+          <Weather5d3hForecast/>
         </div>
       );
     }
@@ -51,6 +53,7 @@ const Weather = () => {
         </div>
         <WeatherForecastParent isInitialReq={searchState.initialRequest} />
         <WeatherDailyForecastParent/>
+        <Weather5d3hForecast/>
       </div>
     );
   }
